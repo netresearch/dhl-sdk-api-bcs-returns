@@ -34,5 +34,5 @@ interface AuthenticationStorageInterface
     /**
      * @return string
      */
-    public function getPassword(): string;
+    public function getSignature(): string;
 }

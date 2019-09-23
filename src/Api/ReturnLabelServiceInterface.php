@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Paket\Retoure\Api;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 
 /**
  * Interface ReturnLabelServiceInterface
@@ -22,7 +23,10 @@ interface ReturnLabelServiceInterface
      * BookLabel is the operation call used to generate return labels.
      *
      * @param \JsonSerializable $returnOrder
+     *
      * @return ConfirmationInterface
+     *
+     * @throws ServiceException
      */
     public function bookLabel(\JsonSerializable $returnOrder): ConfirmationInterface;
 }

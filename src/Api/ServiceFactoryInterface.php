@@ -22,8 +22,6 @@ interface ServiceFactoryInterface
     const BASE_URL_PRODUCTION = 'https://cig.dhl.de/services/production/rest';
     const BASE_URL_SANDBOX = 'https://cig.dhl.de/services/sandbox/rest';
 
-    const OPERATION_BOOK_LABEL = 'returns';
-
     /**
      * Create the return service able to perform return label requests.
      *
