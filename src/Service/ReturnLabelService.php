@@ -28,7 +28,7 @@ use Http\Message\StreamFactory;
  */
 class ReturnLabelService implements ReturnLabelServiceInterface
 {
-    const OPERATION_BOOK_LABEL = 'returns';
+    const OPERATION_BOOK_LABEL = 'returns/';
 
     /**
      * @var HttpClient
