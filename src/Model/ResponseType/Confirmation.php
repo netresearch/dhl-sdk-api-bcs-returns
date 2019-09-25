@@ -18,12 +18,50 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 class Confirmation implements ConfirmationInterface
 {
     /**
+     * @var string
+     */
+    private $shipmentNumber;
+
+    /**
+     * @var string
+     */
+    private $labelData;
+
+    /**
+     * @var string
+     */
+    private $qrLabelData;
+
+    /**
+     * @var string
+     */
+    private $routingCode;
+
+    /**
+     * Confirmation constructor.
+     * @param string $shipmentNumber
+     * @param string $labelData
+     * @param string $qrLabelData
+     * @param string $routingCode
+     */
+    public function __construct(
+        string $shipmentNumber,
+        string $labelData,
+        string $qrLabelData,
+        string $routingCode
+    ) {
+        $this->shipmentNumber = $shipmentNumber;
+        $this->labelData = $labelData;
+        $this->qrLabelData = $qrLabelData;
+        $this->routingCode = $routingCode;
+    }
+
+    /**
      * @return string
      */
     public function getShipmentNumber(): string
     {
-        // TODO: Implement getShipmentNumber() method.
-        return '';
+        return $this->shipmentNumber;
     }
 
     /**
@@ -31,8 +69,7 @@ class Confirmation implements ConfirmationInterface
      */
     public function getLabelData(): string
     {
-        // TODO: Implement getLabelData() method.
-        return '';
+        return $this->labelData;
     }
 
     /**
@@ -40,8 +77,7 @@ class Confirmation implements ConfirmationInterface
      */
     public function getQrLabelData(): string
     {
-        // TODO: Implement getQrLabelData() method.
-        return '';
+        return $this->qrLabelData;
     }
 
     /**
@@ -49,7 +85,6 @@ class Confirmation implements ConfirmationInterface
      */
     public function getRoutingCode(): string
     {
-        // TODO: Implement getRoutingCode() method.
-        return '';
+        return $this->routingCode;
     }
 }

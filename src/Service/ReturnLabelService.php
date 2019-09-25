@@ -104,9 +104,15 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         } catch (\Exception $exception) {
             throw ServerException::create($exception);
         }
+        $responseData = $this->serializer->decode($responseJson);
 
-        // TODO respone handling
-        $confirmation = new Confirmation();
+        $shipmentNumber = $responseData['shipmentNumber'] ?: '';
+        $labelData = $responseData['labelData'] ?: '';
+        $qrLabelData = $responseData['qrLabelData'] ?: '';
+        $routingCode = $responseData['routingCode'] ?: '';
+
+        $confirmation = new Confirmation($shipmentNumber, $labelData, $qrLabelData, $routingCode);
+
         return $confirmation;
     }
 }

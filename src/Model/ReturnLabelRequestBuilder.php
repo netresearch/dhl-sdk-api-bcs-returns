@@ -284,7 +284,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         }
 
         $returnOrder = new ReturnOrder($this->data['receiverId'], $customerAddress);
-        $returnOrder->setBillingNumber($this->data['billingNumber']);
+        $returnOrder->setCustomerReference($this->data['billingNumber']);
         $returnOrder->setShipmentReference($this->data['shipmentReference'] ?? null);
         $returnOrder->setReturnDocumentType($this->data['returnDocumentType'] ?? ReturnOrder::DOCUMENT_TYPE_BOTH);
 

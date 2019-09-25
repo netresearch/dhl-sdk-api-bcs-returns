@@ -55,12 +55,10 @@ class JsonSerializer
 
     /**
      * @param string $jsonResponse
-     * @return mixed
+     * @return string[]
      */
-    public function decode(string $jsonResponse)
+    public function decode(string $jsonResponse): array
     {
-        $response = \json_decode($jsonResponse);
-
-        return $response;
+        return \json_decode($jsonResponse, true);
     }
 }

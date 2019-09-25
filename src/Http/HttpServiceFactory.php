@@ -9,10 +9,10 @@ namespace Dhl\Sdk\Paket\Retoure\Http;
 use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
+use Dhl\Sdk\Paket\Retoure\Http\ClientPlugin\ReturnLabelErrorPlugin;
 use Dhl\Sdk\Paket\Retoure\Serializer\JsonSerializer;
 use Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService;
 use Http\Client\Common\Plugin\AuthenticationPlugin;
-use Http\Client\Common\Plugin\ErrorPlugin;
 use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
@@ -73,8 +73,9 @@ class HttpServiceFactory implements ServiceFactoryInterface
             ),
             new AuthenticationPlugin($authentication),
             new LoggerPlugin($logger, new FullHttpMessageFormatter(4096)),
-            new ErrorPlugin()
+            new ReturnLabelErrorPlugin()
         ];
+
         $client = new PluginClient($this->httpClient, $plugins);
         $baseUrl = $sandboxMode ? self::BASE_URL_SANDBOX : self::BASE_URL_PRODUCTION;
         $serializer = new JsonSerializer();

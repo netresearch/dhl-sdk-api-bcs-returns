@@ -32,7 +32,7 @@ class ReturnOrder implements \JsonSerializable
     /**
      * @var string|null
      */
-    private $billingNumber;
+    private $customerReference;
 
     /**
      * @var string|null
@@ -83,12 +83,12 @@ class ReturnOrder implements \JsonSerializable
     }
 
     /**
-     * @param string|null $billingNumber
+     * @param string|null $customerReference
      * @return ReturnOrder
      */
-    public function setBillingNumber(string $billingNumber = null): self
+    public function setCustomerReference(string $customerReference = null): self
     {
-        $this->billingNumber = $billingNumber;
+        $this->customerReference = $customerReference;
 
         return $this;
     }

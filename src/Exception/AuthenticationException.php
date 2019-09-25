@@ -14,6 +14,6 @@ namespace Dhl\Sdk\Paket\Retoure\Exception;
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */
-class AuthenticationException extends ServiceException
+class AuthenticationException extends ClientException
 {
 }
