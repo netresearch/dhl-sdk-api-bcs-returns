@@ -64,12 +64,13 @@ interface ReturnLabelRequestBuilderInterface
     /**
      * Set package related data (optional).
      *
-     * @param float|null $weightInGrams Total weight of all included items (plus tare weight).
+     * @param int|null $weightInGrams Total weight of all included items (plus tare weight).
      * @param float|null $amount Total monetary value of all included items.
+     *
      * @return ReturnLabelRequestBuilderInterface
      */
     public function setPackageDetails(
-        float $weightInGrams = null,
+        int $weightInGrams = null,
         float $amount = null
     ): ReturnLabelRequestBuilderInterface;
 
