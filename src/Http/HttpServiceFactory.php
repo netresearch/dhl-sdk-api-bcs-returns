@@ -58,10 +58,11 @@ class HttpServiceFactory implements ServiceFactoryInterface
         LoggerInterface $logger,
         bool $sandboxMode = false
     ): ReturnLabelServiceInterface {
-        $authentication = new BasicAuth($authStorage->getUser(), $authStorage->getSignature());
+        $authentication = new BasicAuth($authStorage->getApplicationId(), $authStorage->getApplicationToken());
         $userAuthHeader = base64_encode(
-            $authStorage->getApplicationId() . ':' . $authStorage->getApplicationToken()
+            $authStorage->getUser() . ':' . $authStorage->getSignature()
         );
+
         $plugins = [
             new HeaderAppendPlugin(
                 [
