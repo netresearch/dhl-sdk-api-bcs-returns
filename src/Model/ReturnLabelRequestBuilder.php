@@ -111,7 +111,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
     }
 
     /**
-     * Set the sender of the return shipment.
+     * Set the sender of the return shipment (the consumer).
      *
      * @param string $name
      * @param string $countryCode
@@ -125,7 +125,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
      * @param string|null $countryName
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setCustomerAddress(
+    public function setShipperAddress(
         string $name,
         string $countryCode,
         string $postalCode,
@@ -137,16 +137,16 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         string $state = null,
         string $countryName = null
     ): ReturnLabelRequestBuilderInterface {
-        $this->data['customer']['address']['name'] = $name;
-        $this->data['customer']['address']['countryCode'] = $countryCode;
-        $this->data['customer']['address']['postalCode'] = $postalCode;
-        $this->data['customer']['address']['city'] = $city;
-        $this->data['customer']['address']['streetName'] = $streetName;
-        $this->data['customer']['address']['streetNumber'] = $streetNumber;
-        $this->data['customer']['address']['company'] = $company;
-        $this->data['customer']['address']['nameAddition'] = $nameAddition;
-        $this->data['customer']['address']['state'] = $state;
-        $this->data['customer']['address']['countryName'] = $countryName;
+        $this->data['shipper']['address']['name'] = $name;
+        $this->data['shipper']['address']['countryCode'] = $countryCode;
+        $this->data['shipper']['address']['postalCode'] = $postalCode;
+        $this->data['shipper']['address']['city'] = $city;
+        $this->data['shipper']['address']['streetName'] = $streetName;
+        $this->data['shipper']['address']['streetNumber'] = $streetNumber;
+        $this->data['shipper']['address']['company'] = $company;
+        $this->data['shipper']['address']['nameAddition'] = $nameAddition;
+        $this->data['shipper']['address']['state'] = $state;
+        $this->data['shipper']['address']['countryName'] = $countryName;
 
         return $this;
     }
@@ -158,10 +158,10 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
      * @param string|null $phoneNumber
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setCustomerContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface
+    public function setContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface
     {
-        $this->data['customer']['contact']['email'] = $email;
-        $this->data['customer']['contact']['phoneNumber'] = $phoneNumber;
+        $this->data['contact']['email'] = $email;
+        $this->data['contact']['phoneNumber'] = $phoneNumber;
 
         return $this;
     }
@@ -239,20 +239,20 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
      */
     public function create(): \JsonSerializable
     {
-        $country = new Country($this->data['customer']['address']['countryCode']);
-        $country->setState($this->data['customer']['address']['state']);
-        $country->setCountry($this->data['customer']['address']['countryName']);
+        $country = new Country($this->data['shipper']['address']['countryCode']);
+        $country->setState($this->data['shipper']['address']['state']);
+        $country->setCountry($this->data['shipper']['address']['countryName']);
 
-        $customerAddress = new SimpleAddress(
-            $this->data['customer']['address']['name'],
-            $this->data['customer']['address']['streetName'],
-            $this->data['customer']['address']['streetNumber'],
-            $this->data['customer']['address']['postalCode'],
-            $this->data['customer']['address']['city']
+        $senderAddress = new SimpleAddress(
+            $this->data['shipper']['address']['name'],
+            $this->data['shipper']['address']['streetName'],
+            $this->data['shipper']['address']['streetNumber'],
+            $this->data['shipper']['address']['postalCode'],
+            $this->data['shipper']['address']['city']
         );
-        $customerAddress->setCountry($country);
-        $customerAddress->setName2($this->data['customer']['address']['company']);
-        $customerAddress->setName3($this->data['customer']['address']['nameAddition']);
+        $senderAddress->setCountry($country);
+        $senderAddress->setName2($this->data['shipper']['address']['company']);
+        $senderAddress->setName3($this->data['shipper']['address']['nameAddition']);
 
         if (isset($this->data['customsDetails'], $this->data['customsDetails']['items'])) {
             $positions = array_map(
@@ -283,13 +283,13 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
             $customsDocument = null;
         }
 
-        $returnOrder = new ReturnOrder($this->data['receiverId'], $customerAddress);
+        $returnOrder = new ReturnOrder($this->data['receiverId'], $senderAddress);
         $returnOrder->setCustomerReference($this->data['billingNumber']);
         $returnOrder->setShipmentReference($this->data['shipmentReference'] ?? null);
         $returnOrder->setReturnDocumentType($this->data['returnDocumentType'] ?? ReturnOrder::DOCUMENT_TYPE_BOTH);
 
-        $returnOrder->setEmail($this->data['customer']['contact']['email'] ?? null);
-        $returnOrder->setPhoneNumber($this->data['customer']['contact']['phoneNumber'] ?? null);
+        $returnOrder->setEmail($this->data['contact']['email'] ?? null);
+        $returnOrder->setPhoneNumber($this->data['contact']['phoneNumber'] ?? null);
 
         $returnOrder->setValue($this->data['package']['amount'] ?? null);
         $returnOrder->setWeightInGrams($this->data['package']['weight'] ?? null);

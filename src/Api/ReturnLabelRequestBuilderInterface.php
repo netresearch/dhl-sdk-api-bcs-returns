@@ -75,7 +75,7 @@ interface ReturnLabelRequestBuilderInterface
     ): ReturnLabelRequestBuilderInterface;
 
     /**
-     * Set the sender of the return shipment.
+     * Set the sender of the return shipment (the consumer).
      *
      * @param string $name
      * @param string $countryCode
@@ -89,7 +89,7 @@ interface ReturnLabelRequestBuilderInterface
      * @param string|null $countryName
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setCustomerAddress(
+    public function setShipperAddress(
         string $name,
         string $countryCode,
         string $postalCode,
@@ -109,7 +109,7 @@ interface ReturnLabelRequestBuilderInterface
      * @param string|null $phoneNumber
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setCustomerContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface;
+    public function setContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface;
 
     /**
      * Set customs details, mandatory if customs form ("CN23") is required.

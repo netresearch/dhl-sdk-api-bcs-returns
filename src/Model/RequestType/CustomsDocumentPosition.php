@@ -52,24 +52,25 @@ class CustomsDocumentPosition implements \JsonSerializable
 
     /**
      * CustomsDocumentPosition constructor.
-     * @param int $qty
-     * @param string $description
+     *
+     * @param int $count
+     * @param string $positionDescription
      * @param float $value
      * @param int $weightInGrams
-     * @param string $sku
+     * @param string $articleReference
      */
     public function __construct(
-        int $qty,
-        string $description,
-        float $value,
+        int $count,
         int $weightInGrams,
-        string $sku
+        string $positionDescription,
+        float $value,
+        string $articleReference
     ) {
-        $this->count = $qty;
+        $this->count = $count;
         $this->weightInGrams = $weightInGrams;
+        $this->positionDescription = $positionDescription;
         $this->values = $value;
-        $this->positionDescription = $description;
-        $this->articleReference = $sku;
+        $this->articleReference = $articleReference;
     }
 
     /**
