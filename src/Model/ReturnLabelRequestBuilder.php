@@ -259,9 +259,9 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
                 function (array $itemData) {
                     $position = new CustomsDocumentPosition(
                         $itemData['qty'],
+                        $itemData['weight'],
                         $itemData['description'],
                         $itemData['value'],
-                        $itemData['weight'],
                         $itemData['sku']
                     );
                     $position->setOriginCountry($itemData['countryOfOrigin']);

@@ -8,6 +8,7 @@ namespace Dhl\Sdk\Paket\Retoure\Service;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationException;
 use Dhl\Sdk\Paket\Retoure\Exception\ClientException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServerException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
@@ -98,9 +99,12 @@ class ReturnLabelService implements ReturnLabelServiceInterface
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();
         } catch (ClientErrorException $exception) {
+            if ($exception->getCode() === 401) {
+                throw AuthenticationException::create($exception);
+            }
             throw ClientException::create($exception);
         } catch (HttpClientException $exception) {
-            throw  ServerException::httpClientException($exception);
+            throw ServerException::httpClientException($exception);
         } catch (\Exception $exception) {
             throw ServerException::create($exception);
         }

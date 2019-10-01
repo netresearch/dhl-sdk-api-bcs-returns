@@ -44,6 +44,9 @@ abstract class ServiceException extends \Exception implements HttpClientExceptio
      */
     public static function create(\Exception $exception): ServiceException
     {
+        if ($exception->getCode() === 401) {
+            return new AuthenticationException('Authentication failed.', $exception->getCode(), $exception);
+        }
         return new static($exception->getMessage(), $exception->getCode(), $exception);
     }
 

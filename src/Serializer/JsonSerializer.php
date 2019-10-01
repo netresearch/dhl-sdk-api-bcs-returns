@@ -41,7 +41,7 @@ class JsonSerializer
     {
         // Filter null and empty strings
         $filterFunction = static function ($entry): bool {
-            return ($entry !== null) && ($entry !== '');
+            return ($entry !== null) && ($entry !== '') && ($entry !== []);
         };
 
         foreach ($element as &$value) {
