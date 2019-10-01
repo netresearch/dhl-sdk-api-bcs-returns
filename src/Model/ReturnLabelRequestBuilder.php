@@ -256,7 +256,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 
         if (isset($this->data['customsDetails'], $this->data['customsDetails']['items'])) {
             $positions = array_map(
-                function (array $itemData) {
+                static function (array $itemData) {
                     $position = new CustomsDocumentPosition(
                         $itemData['qty'],
                         $itemData['weight'],

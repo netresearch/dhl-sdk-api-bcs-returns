@@ -54,9 +54,9 @@ class CustomsDocumentPosition implements \JsonSerializable
      * CustomsDocumentPosition constructor.
      *
      * @param int $count
+     * @param int $weightInGrams
      * @param string $positionDescription
      * @param float $value
-     * @param int $weightInGrams
      * @param string $articleReference
      */
     public function __construct(
