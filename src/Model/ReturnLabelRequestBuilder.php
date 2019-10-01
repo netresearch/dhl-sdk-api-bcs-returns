@@ -152,16 +152,16 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
     }
 
     /**
-     * Set customer contact (optional).
+     * Set contact data of the sender (the consumer, optional).
      *
      * @param string $email
      * @param string|null $phoneNumber
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface
+    public function setShipperContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface
     {
-        $this->data['contact']['email'] = $email;
-        $this->data['contact']['phoneNumber'] = $phoneNumber;
+        $this->data['shipper']['contact']['email'] = $email;
+        $this->data['shipper']['contact']['phoneNumber'] = $phoneNumber;
 
         return $this;
     }
@@ -288,8 +288,8 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         $returnOrder->setShipmentReference($this->data['shipmentReference'] ?? null);
         $returnOrder->setReturnDocumentType($this->data['returnDocumentType'] ?? ReturnOrder::DOCUMENT_TYPE_BOTH);
 
-        $returnOrder->setEmail($this->data['contact']['email'] ?? null);
-        $returnOrder->setPhoneNumber($this->data['contact']['phoneNumber'] ?? null);
+        $returnOrder->setEmail($this->data['shipper']['contact']['email'] ?? null);
+        $returnOrder->setPhoneNumber($this->data['shipper']['contact']['phoneNumber'] ?? null);
 
         $returnOrder->setValue($this->data['package']['amount'] ?? null);
         $returnOrder->setWeightInGrams($this->data['package']['weight'] ?? null);

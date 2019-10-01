@@ -35,7 +35,7 @@ class ReturnLabelRequestProvider
             $requestBuilder->setDocumentTypePdf();
         }
 
-        $requestBuilder->setContact('tester@nettest.eu');
+        $requestBuilder->setShipperContact('tester@nettest.eu');
         $requestBuilder->setShipperAddress(
             'Test Tester',
             'DEU',
@@ -58,7 +58,7 @@ class ReturnLabelRequestProvider
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('CH', '22222222225301');
 
-        $requestBuilder->setContact('tester@nettest.eu');
+        $requestBuilder->setShipperContact('tester@nettest.eu');
         $requestBuilder->setShipperAddress(
             'Test Tester',
             'CHE',
@@ -100,7 +100,7 @@ class ReturnLabelRequestProvider
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('CH', '22222222225301');
 
-        $requestBuilder->setContact('tester@nettest.eu');
+        $requestBuilder->setShipperContact('tester@nettest.eu');
         $requestBuilder->setShipperAddress(
             'Test Tester',
             'CHE',
@@ -133,7 +133,7 @@ class ReturnLabelRequestProvider
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('CH', '22222222225301');
 
-        $requestBuilder->setContact('tester@nettest.eu');
+        $requestBuilder->setShipperContact('tester@nettest.eu');
         $requestBuilder->setShipperAddress(
             'Test Tester',
             'CHE',

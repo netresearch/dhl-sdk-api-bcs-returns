@@ -103,13 +103,13 @@ interface ReturnLabelRequestBuilderInterface
     ): ReturnLabelRequestBuilderInterface;
 
     /**
-     * Set customer contact (optional).
+     * Set contact data of the sender (the consumer, optional).
      *
      * @param string $email
      * @param string|null $phoneNumber
      * @return ReturnLabelRequestBuilderInterface
      */
-    public function setContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface;
+    public function setShipperContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface;
 
     /**
      * Set customs details, mandatory if customs form ("CN23") is required.
