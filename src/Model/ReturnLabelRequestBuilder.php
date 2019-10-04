@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Paket\Retoure\Model;
 
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\Country;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\CustomsDocument;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\CustomsDocumentPosition;
@@ -236,9 +237,13 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
      * Create the return label request and reset the builder data.
      *
      * @return \JsonSerializable
+     *
+     * @throws RequestValidatorException
      */
     public function create(): \JsonSerializable
     {
+        ReturnLabelRequestValidator::validate($this->data);
+
         $country = new Country($this->data['shipper']['address']['countryCode']);
         $country->setState($this->data['shipper']['address']['state']);
         $country->setCountry($this->data['shipper']['address']['countryName']);

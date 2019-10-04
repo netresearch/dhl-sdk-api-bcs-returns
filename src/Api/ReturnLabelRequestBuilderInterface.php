@@ -6,6 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Api;
 
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
+
 /**
  * Interface ReturnLabelRequestBuilderInterface
  *
@@ -159,6 +161,8 @@ interface ReturnLabelRequestBuilderInterface
      * Create the return label request and reset the builder data.
      *
      * @return \JsonSerializable
+     *
+     * @throws RequestValidatorException
      */
     public function create(): \JsonSerializable;
 }

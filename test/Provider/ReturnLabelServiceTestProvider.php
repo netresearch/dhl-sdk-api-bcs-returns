@@ -6,6 +6,8 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
+
 /**
  * Class ReturnLabelServiceTestProvider
  *
@@ -17,6 +19,7 @@ class ReturnLabelServiceTestProvider
 {
     /**
      * @return \JsonSerializable[][]|string[][]
+     * @throws RequestValidatorException
      */
     public static function labelSuccess(): array
     {
@@ -39,6 +42,7 @@ class ReturnLabelServiceTestProvider
 
     /**
      * @return \JsonSerializable[][]|int[][]|string[][]
+     * @throws RequestValidatorException
      */
     public static function labelError(): array
     {
@@ -51,8 +55,6 @@ class ReturnLabelServiceTestProvider
         // request data issues
         $badRequest = ReturnLabelRequestProvider::validationErrorRequest(); // invalid required value
         $validationErrorResponse = ReturnLabelResponseProvider::validationFailed();
-        $serverErrorRequest = ReturnLabelRequestProvider::serverErrorRequest(); // missing required value
-        $serverErrorResponse = ReturnLabelResponseProvider::serverError();
 
         // service uri issues
         $forbiddenResponse = ReturnLabelResponseProvider::forbidden(); // wrong service path
@@ -63,13 +65,13 @@ class ReturnLabelServiceTestProvider
             '400 Bad Request (DPDHL header)' => [$validRequest, 400, 'application/json', $authFailedResponse],
             '400 Bad Request (message validation)' => [$badRequest, 400, 'application/json', $validationErrorResponse],
             '403 Forbidden (wrong service path)' => [$validRequest, 403, 'text/html', $forbiddenResponse],
-            '500 Internal Server Error (JSON)' => [$serverErrorRequest, 500, 'application/json', $serverErrorResponse],
             '500 Internal Server Error (HTML)' => [$validRequest, 500, 'text/html', $serverErrorHtmlResponse]
         ];
     }
 
     /**
      * @return \JsonSerializable[][]
+     * @throws RequestValidatorException
      */
     public static function networkError(): array
     {

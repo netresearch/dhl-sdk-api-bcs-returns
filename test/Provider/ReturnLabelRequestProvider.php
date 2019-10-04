@@ -6,6 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder;
 
 /**
@@ -22,6 +23,7 @@ class ReturnLabelRequestProvider
      *
      * @param string|null $qrCode
      * @return \JsonSerializable
+     * @throws RequestValidatorException
      */
     public static function validRequest(string $qrCode = null): \JsonSerializable
     {
@@ -52,6 +54,7 @@ class ReturnLabelRequestProvider
      * Build a valid request for a return label which requires a customs document.
      *
      * @return \JsonSerializable
+     * @throws RequestValidatorException
      */
     public static function validCustomsRequest(): \JsonSerializable
     {
@@ -91,9 +94,10 @@ class ReturnLabelRequestProvider
     }
 
     /**
-     * Set a two-letter country code as origin country to trigger a validation error response (400 Bad Request).
+     * Set an invalid country code as origin country to trigger a validation error response (400 Bad Request).
      *
      * @return \JsonSerializable
+     * @throws RequestValidatorException
      */
     public static function validationErrorRequest(): \JsonSerializable
     {
@@ -116,44 +120,7 @@ class ReturnLabelRequestProvider
             59,
             800,
             '24-MB02',
-            'DE', // invalid, must be DEU
-            '123456'
-        );
-
-        return $requestBuilder->create();
-    }
-
-    /**
-     * Set empty currency to trigger a server error response (500 Server Error).
-     *
-     * @return \JsonSerializable
-     */
-    public static function serverErrorRequest(): \JsonSerializable
-    {
-        $requestBuilder = new ReturnLabelRequestBuilder();
-        $requestBuilder->setAccountDetails('CH', '22222222225301');
-
-        $requestBuilder->setShipperContact('tester@nettest.eu');
-        $requestBuilder->setShipperAddress(
-            'Test Tester',
-            'CHE',
-            '8005',
-            'Zürich',
-            'Lagerstrasse',
-            '11'
-        );
-        $requestBuilder->setCustomsDetails(
-            '', // invalid, must be one of the supported currencies
-            '000000052',
-            'dhlpaket'
-        );
-        $requestBuilder->addCustomsItem(
-            1,
-            'DHL Test Description',
-            59,
-            800,
-            '24-MB02',
-            'DEU',
+            'XXX', // invalid, must be three-letter iso code
             '123456'
         );
 

@@ -9,6 +9,7 @@ namespace Dhl\Sdk\Paket\Retoure\Service;
 use Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage;
 use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationException;
 use Dhl\Sdk\Paket\Retoure\Exception\ClientException;
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServerException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Dhl\Sdk\Paket\Retoure\Http\HttpServiceFactory;
@@ -30,6 +31,7 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @return \JsonSerializable[][]|string[][]
+     * @throws RequestValidatorException
      */
     public function successDataProvider(): array
     {
@@ -38,6 +40,7 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @return \JsonSerializable[][]|int[][]|string[][]
+     * @throws RequestValidatorException
      */
     public function errorDataProvider(): array
     {
@@ -46,6 +49,7 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @return \JsonSerializable[][]
+     * @throws RequestValidatorException
      */
     public function networkErrorDataProvider(): array
     {
