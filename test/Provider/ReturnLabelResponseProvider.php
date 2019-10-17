@@ -52,7 +52,7 @@ class ReturnLabelResponseProvider
      */
     public static function authenticationFailed(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/authenticationFailed.json') ?:'';
+        return \file_get_contents(__DIR__ . '/_files/authenticationFailed.json') ?: '';
     }
 
     /**
