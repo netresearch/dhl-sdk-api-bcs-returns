@@ -72,7 +72,7 @@ class HttpServiceFactory implements ServiceFactoryInterface
                 ]
             ),
             new AuthenticationPlugin($authentication),
-            new LoggerPlugin($logger, new FullHttpMessageFormatter(4096)),
+            new LoggerPlugin($logger, new FullHttpMessageFormatter(null)),
             new ReturnLabelErrorPlugin()
         ];
 

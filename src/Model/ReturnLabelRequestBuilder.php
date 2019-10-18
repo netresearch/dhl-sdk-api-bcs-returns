@@ -294,7 +294,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         $returnOrder->setReturnDocumentType($this->data['returnDocumentType'] ?? ReturnOrder::DOCUMENT_TYPE_BOTH);
 
         $returnOrder->setEmail($this->data['shipper']['contact']['email'] ?? null);
-        $returnOrder->setPhoneNumber($this->data['shipper']['contact']['phoneNumber'] ?? null);
+        $returnOrder->setTelephoneNumber($this->data['shipper']['contact']['phoneNumber'] ?? null);
 
         $returnOrder->setValue($this->data['package']['amount'] ?? null);
         $returnOrder->setWeightInGrams($this->data['package']['weight'] ?? null);

@@ -52,7 +52,7 @@ class ReturnOrder implements \JsonSerializable
     /**
      * @var string|null
      */
-    private $phoneNumber;
+    private $telephoneNumber;
 
     /**
      * @var float|null
@@ -127,12 +127,12 @@ class ReturnOrder implements \JsonSerializable
     }
 
     /**
-     * @param string|null $phoneNumber
+     * @param string|null $telephoneNumber
      * @return ReturnOrder
      */
-    public function setPhoneNumber(string $phoneNumber = null): self
+    public function setTelephoneNumber(string $telephoneNumber = null): self
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->telephoneNumber = $telephoneNumber;
 
         return $this;
     }

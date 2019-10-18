@@ -117,7 +117,7 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
         self::assertContains("\"shipmentReference\":\"{$shipmentReference}\"", $requestJson);
         self::assertContains("\"returnDocumentType\":\"SHIPMENT_LABEL\"", $requestJson);
         self::assertContains("\"email\":\"{$email}\"", $requestJson);
-        self::assertContains("\"phoneNumber\":\"{$phone}\"", $requestJson);
+        self::assertContains("\"telephoneNumber\":\"{$phone}\"", $requestJson);
         self::assertContains("\"name1\":\"{$shipperName}\"", $requestJson);
         self::assertContains("\"countryISOCode\":\"{$shipperCountry}\"", $requestJson);
         self::assertContains("\"postCode\":\"{$shipperPostalCode}\"", $requestJson);
