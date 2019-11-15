@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\Sdk\Paket\Retoure\Model\ResponseType;
+namespace Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 
