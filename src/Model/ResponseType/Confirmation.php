@@ -56,33 +56,21 @@ class Confirmation implements ConfirmationInterface
         $this->routingCode = $routingCode;
     }
 
-    /**
-     * @return string
-     */
     public function getShipmentNumber(): string
     {
         return $this->shipmentNumber;
     }
 
-    /**
-     * @return string
-     */
     public function getLabelData(): string
     {
         return $this->labelData;
     }
 
-    /**
-     * @return string
-     */
     public function getQrLabelData(): string
     {
         return $this->qrLabelData;
     }
 
-    /**
-     * @return string
-     */
     public function getRoutingCode(): string
     {
         return $this->routingCode;

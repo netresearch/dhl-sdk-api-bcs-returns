@@ -8,13 +8,11 @@ namespace Dhl\Sdk\Paket\Retoure\Service;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
-use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationException;
-use Dhl\Sdk\Paket\Retoure\Exception\ClientException;
-use Dhl\Sdk\Paket\Retoure\Exception\ServerException;
-use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
+use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationErrorException;
+use Dhl\Sdk\Paket\Retoure\Exception\DetailedErrorException;
+use Dhl\Sdk\Paket\Retoure\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\Paket\Retoure\Model\ResponseType\Confirmation;
 use Dhl\Sdk\Paket\Retoure\Serializer\JsonSerializer;
-use Http\Client\Common\Exception\ClientErrorException;
 use Http\Client\Exception as HttpClientException;
 use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
@@ -79,12 +77,6 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         $this->streamFactory = $streamFactory;
     }
 
-    /**
-     * @param \JsonSerializable $returnOrder
-     * @return ConfirmationInterface
-     *
-     * @throws ServiceException
-     */
     public function bookLabel(\JsonSerializable $returnOrder): ConfirmationInterface
     {
         $uri = sprintf('%s/%s', $this->baseUrl, self::OPERATION_BOOK_LABEL);
@@ -98,16 +90,16 @@ class ReturnLabelService implements ReturnLabelServiceInterface
 
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();
-        } catch (ClientErrorException $exception) {
-            if ($exception->getCode() === 401) {
-                throw AuthenticationException::create($exception);
-            }
-            throw ClientException::create($exception);
+        } catch (AuthenticationErrorException $exception) {
+            throw ServiceExceptionFactory::createAuthenticationException($exception);
+        } catch (DetailedErrorException $exception) {
+            throw ServiceExceptionFactory::createDetailedServiceException($exception);
         } catch (HttpClientException $exception) {
-            throw ServerException::httpClientException($exception);
-        } catch (\Exception $exception) {
-            throw ServerException::create($exception);
+            throw ServiceExceptionFactory::createServiceException($exception);
+        } catch (\Throwable $exception) {
+            throw ServiceExceptionFactory::create($exception);
         }
+
         $responseData = $this->serializer->decode($responseJson);
 
         $shipmentNumber = $responseData['shipmentNumber'] ?: '';

@@ -6,9 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Http\ClientPlugin;
 
-use Http\Client\Common\Exception\ClientErrorException;
-use Http\Client\Common\Exception\ServerErrorException;
+use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationErrorException;
+use Dhl\Sdk\Paket\Retoure\Exception\DetailedErrorException;
 use Http\Client\Common\Plugin;
+use Http\Client\Exception\HttpException;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,6 +18,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class ReturnLabelErrorPlugin
  *
  * On request errors, throw an HTTP exception with message extracted from response.
+ *
  * @package Dhl\Sdk\Paket\Retoure\Http
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
@@ -25,28 +27,34 @@ use Psr\Http\Message\ResponseInterface;
 final class ReturnLabelErrorPlugin implements Plugin
 {
     /**
-     * Returns the formatted error message.
+     * Returns TRUE if the response contains a detailed error response.
      *
      * @param ResponseInterface $response
+     *
+     * @return bool
+     */
+    private function isDetailedErrorResponse(ResponseInterface $response): bool
+    {
+        $contentTypes = $response->getHeader('Content-Type');
+        return $contentTypes && ($contentTypes[0] === 'application/json');
+    }
+
+    /**
+     * Try to extract the error message from the response. If not possible, return default message.
+     *
+     * @param string[] $responseData
+     * @param string $defaultMessage
      * @return string
      */
-    private function getErrorMessage(ResponseInterface $response): string
+    private function createErrorMessage(array $responseData, string $defaultMessage): string
     {
-        $responseContentTypes = $response->getHeader('Content-Type');
-        $contentType = $responseContentTypes[0];
-        $errorMessage = $response->getReasonPhrase();
-
-        if ($contentType === 'application/json') {
-            $responseJson = (string)$response->getBody();
-            $responseData = \json_decode($responseJson, true);
-            if (isset($responseData['code'], $responseData['detail'])) {
-                $errorMessage = sprintf('%s (Error %s)', $responseData['detail'], $responseData['code']);
-            } elseif (isset($responseData['statusCode'], $responseData['statusText'])) {
-                $errorMessage = sprintf('%s (Error %s)', $responseData['statusText'], $responseData['statusCode']);
-            }
+        if (isset($responseData['statusCode'], $responseData['statusText'])) {
+            return sprintf('%s (Error %s)', $responseData['statusText'], $responseData['statusCode']);
+        } elseif (isset($responseData['code'], $responseData['detail'])) {
+            return sprintf('%s (Error %s)', $responseData['detail'], $responseData['code']);
+        } else {
+            return $defaultMessage;
         }
-
-        return $errorMessage;
     }
 
     /**
@@ -65,10 +73,27 @@ final class ReturnLabelErrorPlugin implements Plugin
         $fnFulfilled = function (ResponseInterface $response) use ($request) {
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode >= 400 && $statusCode < 500) {
-                throw new ClientErrorException($this->getErrorMessage($response), $request, $response);
-            } elseif ($statusCode >= 500 && $statusCode < 600) {
-                throw new ServerErrorException($this->getErrorMessage($response), $request, $response);
+            if (!$this->isDetailedErrorResponse($response)) {
+                if ($statusCode === 401 || $statusCode === 403) {
+                    $errorMessage = 'Authentication failed. Please check your access credentials.';
+                    throw new AuthenticationErrorException($errorMessage, $request, $response);
+                }
+
+                if ($statusCode >= 400 && $statusCode < 600) {
+                    throw new HttpException($response->getReasonPhrase(), $request, $response);
+                }
+            } else {
+                $responseJson = (string)$response->getBody();
+                $responseData = \json_decode($responseJson, true);
+                $errorMessage = $this->createErrorMessage($responseData, $response->getReasonPhrase());
+
+                if ($statusCode === 401 || $statusCode === 403) {
+                    throw new AuthenticationErrorException($errorMessage, $request, $response);
+                }
+
+                if ($statusCode >= 400 && $statusCode < 600) {
+                    throw new DetailedErrorException($errorMessage, $request, $response);
+                }
             }
 
             // no error

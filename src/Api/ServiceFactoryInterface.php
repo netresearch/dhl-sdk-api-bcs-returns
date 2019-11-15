@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Paket\Retoure\Api;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -23,12 +24,15 @@ interface ServiceFactoryInterface
     const BASE_URL_SANDBOX = 'https://cig.dhl.de/services/sandbox/rest';
 
     /**
-     * Create the return service able to perform return label requests.
+     * Create the service able to perform return shipment label requests.
      *
      * @param AuthenticationStorageInterface $authStorage
      * @param LoggerInterface $logger
      * @param bool $sandboxMode
+     *
      * @return ReturnLabelServiceInterface
+     *
+     * @throws ServiceException
      */
     public function createReturnLabelService(
         AuthenticationStorageInterface $authStorage,

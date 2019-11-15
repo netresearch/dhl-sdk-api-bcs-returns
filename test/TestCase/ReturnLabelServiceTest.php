@@ -8,16 +8,18 @@ namespace Dhl\Sdk\Paket\Retoure\Service;
 
 use Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage;
 use Dhl\Sdk\Paket\Retoure\Exception\AuthenticationException;
-use Dhl\Sdk\Paket\Retoure\Exception\ClientException;
+use Dhl\Sdk\Paket\Retoure\Exception\DetailedServiceException;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
-use Dhl\Sdk\Paket\Retoure\Exception\ServerException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Dhl\Sdk\Paket\Retoure\Http\HttpServiceFactory;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\ReturnOrder;
 use Dhl\Sdk\Paket\Retoure\Test\Expectation\ReturnLabelServiceTestExpectation as Expectation;
 use Dhl\Sdk\Paket\Retoure\Test\Provider\ReturnLabelServiceTestProvider;
 use Http\Client\Exception\NetworkException;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Discovery\StreamFactoryDiscovery;
 use Http\Mock\Client;
+use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
 /**
@@ -27,7 +29,7 @@ use Psr\Log\Test\TestLogger;
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */
-class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
+class ReturnLabelServiceTest extends TestCase
 {
     /**
      * @return \JsonSerializable[][]|string[][]
@@ -70,8 +72,8 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
     {
         $httpClient = new Client();
 
-        $responseFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
+        $responseFactory = MessageFactoryDiscovery::find();
+        $streamFactory = StreamFactoryDiscovery::find();
 
         $returnLabelResponse = $responseFactory
             ->createResponse(201, 'Created')
@@ -99,6 +101,7 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
      * @param int $statusCode
      * @param string $contentType
      * @param string $responseBody
+     *
      * @throws ServiceException
      */
     public function returnLabelError(
@@ -111,15 +114,20 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
 
         if ($statusCode === 401) {
             $this->expectException(AuthenticationException::class);
+            $this->expectExceptionMessageRegExp('/^Authentication failed\./');
         } elseif (($statusCode >= 400) && ($statusCode < 500)) {
-            $this->expectException(ClientException::class);
+            if ($contentType === 'application/json') {
+                $this->expectException(DetailedServiceException::class);
+            } else {
+                $this->expectException(ServiceException::class);
+            }
         } elseif (($statusCode >= 500) && ($statusCode < 600)) {
-            $this->expectException(ServerException::class);
+            $this->expectException(ServiceException::class);
         }
 
         $httpClient = new Client();
-        $responseFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
+        $responseFactory = MessageFactoryDiscovery::find();
+        $streamFactory = StreamFactoryDiscovery::find();
 
         $returnLabelResponse = $responseFactory
             ->createResponse($statusCode)
@@ -154,10 +162,10 @@ class ReturnLabelServiceTest extends \PHPUnit\Framework\TestCase
      */
     public function networkError(\JsonSerializable $returnOrder)
     {
-        $this->expectException(ServerException::class);
+        $this->expectException(ServiceException::class);
 
-        $requestFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory = \Http\Discovery\StreamFactoryDiscovery::find();
+        $requestFactory = MessageFactoryDiscovery::find();
+        $streamFactory = StreamFactoryDiscovery::find();
         $payload = json_encode($returnOrder);
         $stream = $streamFactory->createStream($payload);
 

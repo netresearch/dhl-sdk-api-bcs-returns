@@ -9,7 +9,9 @@ namespace Dhl\Sdk\Paket\Retoure\Service;
 use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\Paket\Retoure\Http\HttpServiceFactory;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
 use Psr\Log\LoggerInterface;
 
@@ -22,22 +24,18 @@ use Psr\Log\LoggerInterface;
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
-    /**
-     * Create the return label service
-     *
-     * @param AuthenticationStorageInterface $authStorage
-     * @param LoggerInterface $logger
-     * @param bool $sandboxMode
-     * @return ReturnLabelServiceInterface
-     */
     public function createReturnLabelService(
         AuthenticationStorageInterface $authStorage,
         LoggerInterface $logger,
         bool $sandboxMode = false
     ): ReturnLabelServiceInterface {
-        $httpClient = HttpClientDiscovery::find();
-        $httpServiceFactory = new HttpServiceFactory($httpClient);
+        try {
+            $httpClient = HttpClientDiscovery::find();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
 
+        $httpServiceFactory = new HttpServiceFactory($httpClient);
         $authService = $httpServiceFactory->createReturnLabelService($authStorage, $logger, $sandboxMode);
 
         return $authService;

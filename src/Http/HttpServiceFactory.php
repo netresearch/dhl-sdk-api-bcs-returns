@@ -9,6 +9,7 @@ namespace Dhl\Sdk\Paket\Retoure\Http;
 use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\Paket\Retoure\Http\ClientPlugin\ReturnLabelErrorPlugin;
 use Dhl\Sdk\Paket\Retoure\Serializer\JsonSerializer;
 use Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService;
@@ -17,6 +18,7 @@ use Http\Client\Common\Plugin\HeaderAppendPlugin;
 use Http\Client\Common\Plugin\LoggerPlugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\HttpClient;
+use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Discovery\StreamFactoryDiscovery;
 use Http\Message\Authentication\BasicAuth;
@@ -46,13 +48,6 @@ class HttpServiceFactory implements ServiceFactoryInterface
         $this->httpClient = $httpClient;
     }
 
-    /**
-     * @param AuthenticationStorageInterface $authStorage
-     * @param LoggerInterface $logger
-     * @param bool $sandboxMode
-     *
-     * @return ReturnLabelServiceInterface
-     */
     public function createReturnLabelService(
         AuthenticationStorageInterface $authStorage,
         LoggerInterface $logger,
@@ -79,8 +74,13 @@ class HttpServiceFactory implements ServiceFactoryInterface
         $client = new PluginClient($this->httpClient, $plugins);
         $baseUrl = $sandboxMode ? self::BASE_URL_SANDBOX : self::BASE_URL_PRODUCTION;
         $serializer = new JsonSerializer();
-        $requestFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
+
+        try {
+            $requestFactory = MessageFactoryDiscovery::find();
+            $streamFactory = StreamFactoryDiscovery::find();
+        } catch (NotFoundException $exception) {
+            throw ServiceExceptionFactory::create($exception);
+        }
 
         return new ReturnLabelService($client, $baseUrl, $serializer, $requestFactory, $streamFactory);
     }

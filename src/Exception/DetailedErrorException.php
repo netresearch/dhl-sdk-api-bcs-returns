@@ -6,13 +6,14 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Exception;
 
+use Http\Client\Exception\HttpException;
+
 /**
- * Class AuthenticationException
+ * A detailed HTTP exception.
  *
- * @api
- * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @author Rico Sonntag <rico.sonntag@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-class AuthenticationException extends DetailedServiceException
+class DetailedErrorException extends HttpException
 {
 }

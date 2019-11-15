@@ -9,11 +9,13 @@ namespace Dhl\Sdk\Paket\Retoure\Exception;
 /**
  * Class RequestValidatorException
  *
+ * A special instance of the DetailedServiceException which is
+ * caused by invalid request data before a web service request was sent.
+ *
  * @api
- * @package Dhl\Sdk\Paket\Retoure\Exception
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://netresearch.de
  */
-class RequestValidatorException extends ClientException
+class RequestValidatorException extends DetailedServiceException
 {
 }
