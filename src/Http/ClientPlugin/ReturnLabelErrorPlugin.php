@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
  *
  * On request errors, throw an HTTP exception with message extracted from response.
  *
- * @package Dhl\Sdk\Paket\Retoure\Http
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de

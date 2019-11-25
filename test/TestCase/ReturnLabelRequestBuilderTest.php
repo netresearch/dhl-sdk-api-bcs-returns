@@ -12,7 +12,6 @@ use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestValidator as Validator;
 /**
  * Class ReturnLabelRequestValidatorTest
  *
- * @package Dhl\Sdk\Paket\Retoure\Test
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

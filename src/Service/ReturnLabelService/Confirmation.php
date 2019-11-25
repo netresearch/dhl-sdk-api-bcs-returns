@@ -11,7 +11,6 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 /**
  * Class Confirmation
  *
- * @package Dhl\Sdk\Paket\Retoure\Model
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

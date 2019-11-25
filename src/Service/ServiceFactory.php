@@ -18,7 +18,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class ServiceFactory
  *
- * @package Dhl\Sdk\Paket\Retoure\Service
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

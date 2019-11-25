@@ -25,7 +25,6 @@ use Psr\Log\Test\TestLogger;
 /**
  * Class ReturnLabelServiceTest
  *
- * @package Dhl\Sdk\Paket\Retoure\Test
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

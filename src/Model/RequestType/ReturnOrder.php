@@ -9,7 +9,6 @@ namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 /**
  * Class ReturnOrder
  *
- * @package Dhl\Sdk\Paket\Retoure\Model
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

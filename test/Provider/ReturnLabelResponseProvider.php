@@ -9,7 +9,6 @@ namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 /**
  * Class ReturnLabelResponseProvider
  *
- * @package Dhl\Sdk\Paket\Retoure\Test
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://netresearch.de
  */

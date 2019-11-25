@@ -11,7 +11,6 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
 /**
  * Class AuthenticationStorage
  *
- * @package Dhl\Sdk\Paket\Retoure\Auth
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -21,7 +21,6 @@ use Http\Message\StreamFactory;
 /**
  * Class ReturnLabelService
  *
- * @package Dhl\Sdk\Paket\Retoure\Service
  * @author  Andreas Müller <andreas.mueller@netresearch.de>
  * @link    https://www.netresearch.de/
  */

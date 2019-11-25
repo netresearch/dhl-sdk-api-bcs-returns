@@ -11,7 +11,6 @@ namespace Dhl\Sdk\Paket\Retoure\Serializer;
  *
  * Serializer for outgoing request types and incoming responses.
  *
- * @package Dhl\Sdk\Paket\Retoure\Serializer
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
  */
