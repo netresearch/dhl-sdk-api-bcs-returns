@@ -44,10 +44,5 @@
         "psr-4": {
             "Dhl\\Sdk\\Paket\\Retoure\\Test\\": "test/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "1.0.x-dev"
-        }
     }
 }
