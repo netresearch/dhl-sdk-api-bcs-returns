@@ -8,31 +8,31 @@ The DHL Paket Retoure API SDK package offers an interface to the following web s
 
 ### System Requirements
 
-- PHP 7.0+ with JSON extension
+- PHP 7.1+ with JSON extension
 
 ### Package Requirements
 
 - `php-http/discovery`: Discovery service for HTTP client and message factory implementations
 - `php-http/httplug`: Pluggable HTTP client abstraction
 - `php-http/logger-plugin`: HTTP client logger plugin for HTTPlug
-- `php-http/message`: Message factory implementations & message formatter for logging
-- `php-http/message-factory`: HTTP message factory interfaces
+- `psr/http-client`: PSR-18 HTTP client interfaces
+- `psr/http-factory`: PSR-7 HTTP message factory interfaces
 - `psr/http-message`: PSR-7 HTTP message interfaces
 - `psr/log`: PSR-3 logger interfaces
 
 ### Virtual Package Requirements
 
-- `php-http/client-implementation`: Any package that provides a HTTPlug HTTP client
-- `php-http/message-factory-implementationn`: Any package that provides HTTP message factories
+- `psr/http-client-implementation`: Any package that provides a PSR-18 compatible HTTP client
+- `psr/http-factory-implementation`: Any package that provides PSR-7 compatible HTTP message factories
 - `psr/http-message-implementation`: Any package that provides PSR-7 HTTP messages
-- `psr/log-implementation`: Any package that provides a PSR-3 logger
 
 ### Development Package Requirements
 
-- `guzzlehttp/psr7`: PSR-7 HTTP message implementation
+- `nyholm/psr7`: PSR-7 HTTP message factory & message implementation
 - `phpunit/phpunit`: Testing framework
 - `php-http/mock-client`: HTTPlug mock client implementation
 - `phpstan/phpstan`: Static analysis tool
+- `squizlabs/php_codesniffer`: Static analysis tool
 
 ## Installation
 

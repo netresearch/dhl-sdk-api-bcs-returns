@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
@@ -9,14 +11,14 @@ namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 /**
  * Class ReturnOrder
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ReturnOrder implements \JsonSerializable
 {
-    const DOCUMENT_TYPE_PDF = 'SHIPMENT_LABEL';
-    const DOCUMENT_TYPE_QR = 'QR_LABEL';
-    const DOCUMENT_TYPE_BOTH = 'BOTH';
+    public const DOCUMENT_TYPE_PDF = 'SHIPMENT_LABEL';
+    public const DOCUMENT_TYPE_QR = 'QR_LABEL';
+    public const DOCUMENT_TYPE_BOTH = 'BOTH';
 
     /**
      * @var string
@@ -68,11 +70,6 @@ class ReturnOrder implements \JsonSerializable
      */
     private $customsDocument;
 
-    /**
-     * ReturnOrder constructor.
-     * @param string $receiverId
-     * @param SimpleAddress $senderAddress
-     */
     public function __construct(
         string $receiverId,
         SimpleAddress $senderAddress
@@ -81,88 +78,56 @@ class ReturnOrder implements \JsonSerializable
         $this->senderAddress = $senderAddress;
     }
 
-    /**
-     * @param string|null $customerReference
-     * @return ReturnOrder
-     */
-    public function setCustomerReference(string $customerReference = null): self
+    public function setCustomerReference(?string $customerReference): self
     {
         $this->customerReference = $customerReference;
 
         return $this;
     }
 
-    /**
-     * @param string|null $shipmentReference
-     * @return ReturnOrder
-     */
-    public function setShipmentReference(string $shipmentReference = null): self
+    public function setShipmentReference(?string $shipmentReference): self
     {
         $this->shipmentReference = $shipmentReference;
 
         return $this;
     }
 
-    /**
-     * @param string|null $returnDocumentType
-     * @return ReturnOrder
-     */
-    public function setReturnDocumentType(string $returnDocumentType = null): self
+    public function setReturnDocumentType(?string $returnDocumentType): self
     {
         $this->returnDocumentType = $returnDocumentType;
 
         return $this;
     }
 
-    /**
-     * @param string|null $email
-     * @return ReturnOrder
-     */
-    public function setEmail(string $email = null): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * @param string|null $telephoneNumber
-     * @return ReturnOrder
-     */
-    public function setTelephoneNumber(string $telephoneNumber = null): self
+    public function setTelephoneNumber(?string $telephoneNumber): self
     {
         $this->telephoneNumber = $telephoneNumber;
 
         return $this;
     }
 
-    /**
-     * @param float|null $value
-     * @return ReturnOrder
-     */
-    public function setValue(float $value = null): self
+    public function setValue(?float $value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @param int|null $weightInGrams
-     * @return ReturnOrder
-     */
-    public function setWeightInGrams(int $weightInGrams = null): self
+    public function setWeightInGrams(?int $weightInGrams): self
     {
         $this->weightInGrams = $weightInGrams;
 
         return $this;
     }
 
-    /**
-     * @param CustomsDocument|null $customsDocument
-     * @return ReturnOrder
-     */
-    public function setCustomsDocument(CustomsDocument $customsDocument = null): self
+    public function setCustomsDocument(?CustomsDocument $customsDocument): self
     {
         $this->customsDocument = $customsDocument;
 

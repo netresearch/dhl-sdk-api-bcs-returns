@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model;
@@ -16,8 +18,8 @@ use Dhl\Sdk\Paket\Retoure\Model\RequestType\SimpleAddress;
 /**
  * Class ReturnLabelRequestBuilder
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 {
@@ -28,7 +30,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 
     public function setAccountDetails(
         string $receiverId,
-        string $billingNumber = null
+        ?string $billingNumber = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['receiverId'] = $receiverId;
         $this->data['billingNumber'] = $billingNumber;
@@ -58,8 +60,8 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
     }
 
     public function setPackageDetails(
-        int $weightInGrams = null,
-        float $amount = null
+        ?int $weightInGrams = null,
+        ?float $amount = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['package']['weight'] = $weightInGrams;
         $this->data['package']['amount'] = $amount;
@@ -74,10 +76,10 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         string $city,
         string $streetName,
         string $streetNumber,
-        string $company = null,
-        string $nameAddition = null,
-        string $state = null,
-        string $countryName = null
+        ?string $company = null,
+        ?string $nameAddition = null,
+        ?string $state = null,
+        ?string $countryName = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['shipper']['address']['name'] = $name;
         $this->data['shipper']['address']['countryCode'] = $countryCode;
@@ -93,7 +95,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         return $this;
     }
 
-    public function setShipperContact(string $email, string $phoneNumber = null): ReturnLabelRequestBuilderInterface
+    public function setShipperContact(string $email, ?string $phoneNumber = null): ReturnLabelRequestBuilderInterface
     {
         $this->data['shipper']['contact']['email'] = $email;
         $this->data['shipper']['contact']['phoneNumber'] = $phoneNumber;
@@ -103,12 +105,12 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 
     public function setCustomsDetails(
         string $currency,
-        string $originalShipmentNumber = null,
-        string $originalOperator = null,
-        string $accompanyingDocument = null,
-        string $originalInvoiceNumber = null,
-        string $originalInvoiceDate = null,
-        string $comment = null
+        ?string $originalShipmentNumber = null,
+        ?string $originalOperator = null,
+        ?string $accompanyingDocument = null,
+        ?string $originalInvoiceNumber = null,
+        ?string $originalInvoiceDate = null,
+        ?string $comment = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['customsDetails']['currency'] = $currency;
         $this->data['customsDetails']['originalShipmentNumber'] = $originalShipmentNumber;
@@ -127,8 +129,8 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         float $value,
         int $weightInGrams,
         string $sku,
-        string $countryOfOrigin = null,
-        string $tariffNumber = null
+        ?string $countryOfOrigin = null,
+        ?string $tariffNumber = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['customsDetails']['items'][] = [
             'qty' => $qty,

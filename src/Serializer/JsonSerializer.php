@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Serializer;
@@ -11,15 +13,11 @@ namespace Dhl\Sdk\Paket\Retoure\Serializer;
  *
  * Serializer for outgoing request types and incoming responses.
  *
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Max Melzer <max.melzer@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class JsonSerializer
 {
-    /**
-     * @param \JsonSerializable $request
-     * @return string
-     */
     public function encode(\JsonSerializable $request): string
     {
         // remove empty entries from serialized data (after all objects were converted to array)
@@ -33,8 +31,8 @@ class JsonSerializer
     /**
      * Recursively filter null and empty strings from the given (nested) array
      *
-     * @param array $element
-     * @return array
+     * @param mixed[] $element
+     * @return mixed[]
      */
     private function filterRecursive(array $element): array
     {

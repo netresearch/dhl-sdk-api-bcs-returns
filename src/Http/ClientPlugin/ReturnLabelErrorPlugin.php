@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Http\ClientPlugin;
@@ -19,9 +21,9 @@ use Psr\Http\Message\ResponseInterface;
  *
  * On request errors, throw an HTTP exception with message extracted from response.
  *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Christoph Aßmann <christoph.assmann@netresearch.de>
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 final class ReturnLabelErrorPlugin implements Plugin
 {
@@ -49,11 +51,11 @@ final class ReturnLabelErrorPlugin implements Plugin
     {
         if (isset($responseData['statusCode'], $responseData['statusText'])) {
             return sprintf('%s (Error %s)', $responseData['statusText'], $responseData['statusCode']);
-        } elseif (isset($responseData['code'], $responseData['detail'])) {
-            return sprintf('%s (Error %s)', $responseData['detail'], $responseData['code']);
-        } else {
-            return $defaultMessage;
         }
+        if (isset($responseData['code'], $responseData['detail'])) {
+            return sprintf('%s (Error %s)', $responseData['detail'], $responseData['code']);
+        }
+        return $defaultMessage;
     }
 
     /**

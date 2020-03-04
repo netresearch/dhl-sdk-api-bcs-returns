@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Auth;
@@ -11,8 +13,8 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface;
 /**
  * Class AuthenticationStorage
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class AuthenticationStorage implements AuthenticationStorageInterface
 {
@@ -36,13 +38,6 @@ class AuthenticationStorage implements AuthenticationStorageInterface
      */
     private $signature;
 
-    /**
-     * AuthenticationStorage constructor.
-     * @param string $applicationId
-     * @param string $applicationToken
-     * @param string $user
-     * @param string $signature
-     */
     public function __construct(
         string $applicationId,
         string $applicationToken,

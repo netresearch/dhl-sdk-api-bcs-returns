@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Service;
@@ -18,8 +20,8 @@ use Psr\Log\LoggerInterface;
 /**
  * Class ServiceFactory
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ServiceFactory implements ServiceFactoryInterface
 {
@@ -35,8 +37,7 @@ class ServiceFactory implements ServiceFactoryInterface
         }
 
         $httpServiceFactory = new HttpServiceFactory($httpClient);
-        $authService = $httpServiceFactory->createReturnLabelService($authStorage, $logger, $sandboxMode);
 
-        return $authService;
+        return $httpServiceFactory->createReturnLabelService($authStorage, $logger, $sandboxMode);
     }
 }

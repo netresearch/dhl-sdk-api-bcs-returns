@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
@@ -9,8 +11,8 @@ namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 /**
  * Class Country
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class Country implements \JsonSerializable
 {
@@ -29,31 +31,19 @@ class Country implements \JsonSerializable
      */
     private $state;
 
-    /**
-     * Country constructor.
-     * @param string $countryISOCode
-     */
     public function __construct(string $countryISOCode)
     {
         $this->countryISOCode = $countryISOCode;
     }
 
-    /**
-     * @param string|null $country
-     * @return Country
-     */
-    public function setCountry(string $country = null): self
+    public function setCountry(?string $country): self
     {
         $this->country = $country;
 
         return $this;
     }
 
-    /**
-     * @param string|null $state
-     * @return Country
-     */
-    public function setState(string $state = null): self
+    public function setState(?string $state): self
     {
         $this->state = $state;
 

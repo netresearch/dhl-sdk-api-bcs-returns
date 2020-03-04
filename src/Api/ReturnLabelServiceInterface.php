@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Api;
@@ -15,8 +17,8 @@ use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
  * Interface ReturnLabelServiceInterface
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Christoph Aßmann <christoph.assmann@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface ReturnLabelServiceInterface
 {

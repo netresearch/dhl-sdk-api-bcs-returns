@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Test\Expectation;
@@ -15,8 +17,8 @@ use Psr\Log\Test\TestLogger;
 /**
  * Class ReturnLabelServiceTestExpectation
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ReturnLabelServiceTestExpectation
 {

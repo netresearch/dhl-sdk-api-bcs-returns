@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
@@ -9,8 +11,8 @@ namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 /**
  * Class CustomsDocument
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class CustomsDocument implements \JsonSerializable
 {
@@ -67,66 +69,41 @@ class CustomsDocument implements \JsonSerializable
         $this->positions = $positions;
     }
 
-    /**
-     * @param string|null $originalShipmentNumber
-     * @return CustomsDocument
-     */
-    public function setOriginalShipmentNumber(string $originalShipmentNumber = null): self
+    public function setOriginalShipmentNumber(?string $originalShipmentNumber): self
     {
         $this->originalShipmentNumber = $originalShipmentNumber;
 
         return $this;
     }
 
-    /**
-     * @param string|null $originalOperator
-     * @return CustomsDocument
-     */
-    public function setOriginalOperator(string $originalOperator = null): self
+    public function setOriginalOperator(?string $originalOperator): self
     {
         $this->originalOperator = $originalOperator;
 
         return $this;
     }
 
-    /**
-     * @param string|null $accompanyingDocument
-     * @return CustomsDocument
-     */
-    public function setAccompanyingDocument(string $accompanyingDocument = null): self
+    public function setAccompanyingDocument(?string $accompanyingDocument): self
     {
         $this->acommpanyingDocument = $accompanyingDocument;
 
         return $this;
     }
 
-    /**
-     * @param string|null $originalInvoiceNumber
-     * @return CustomsDocument
-     */
-    public function setOriginalInvoiceNumber(string $originalInvoiceNumber = null): self
+    public function setOriginalInvoiceNumber(?string $originalInvoiceNumber): self
     {
         $this->originalInvoiceNumber = $originalInvoiceNumber;
 
         return $this;
     }
-
-    /**
-     * @param string|null $originalInvoiceDate
-     * @return CustomsDocument
-     */
-    public function setOriginalInvoiceDate(string $originalInvoiceDate = null): self
+    public function setOriginalInvoiceDate(?string $originalInvoiceDate): self
     {
         $this->originalInvoiceDate = $originalInvoiceDate;
 
         return $this;
     }
 
-    /**
-     * @param string|null $comment
-     * @return CustomsDocument
-     */
-    public function setComment(string $comment = null): self
+    public function setComment(?string $comment): self
     {
         $this->comment = $comment;
 

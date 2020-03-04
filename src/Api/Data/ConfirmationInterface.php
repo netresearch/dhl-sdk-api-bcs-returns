@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Api\Data;
@@ -10,8 +12,8 @@ namespace Dhl\Sdk\Paket\Retoure\Api\Data;
  * Interface ConfirmationInterface
  *
  * @api
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Christoph Aßmann <christoph.assmann@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 interface ConfirmationInterface
 {

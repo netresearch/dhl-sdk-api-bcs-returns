@@ -15,24 +15,24 @@
         }
     ],
     "require": {
-        "php": "^7.0.0",
+        "php": "^7.1.0",
         "ext-json": "*",
-        "php-http/client-implementation": "^1.0.0",
         "php-http/discovery": "^1.0.0",
-        "php-http/httplug": "^1.0.0 || ^2.0.0",
+        "php-http/httplug": "^2.0.0",
         "php-http/logger-plugin": "^1.0.0",
-        "php-http/message": "^1.0.0",
-        "php-http/message-factory-implementation": "^1.0.0",
-        "php-http/message-factory": "^1.0.0",
+        "psr/http-client": "^1.0.0",
+        "psr/http-client-implementation": "^1.0.0",
+        "psr/http-factory": "^1.0.0",
+        "psr/http-factory-implementation": "^1.0.0",
         "psr/http-message": "^1.0.0",
         "psr/http-message-implementation": "^1.0.0",
         "psr/log": "^1.1.0"
     },
     "require-dev": {
-        "guzzlehttp/psr7": "^1.5.0",
-        "phpunit/phpunit": "^6.0.0",
-        "php-http/mock-client": "^1.0.0",
-        "phpstan/phpstan": "^0.9.0",
+        "nyholm/psr7": "^1.0.0",
+        "phpunit/phpunit": "^7.0.0",
+        "php-http/mock-client": "dev-upgrade-version-2",
+        "phpstan/phpstan": "^0.12.2",
         "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
@@ -43,6 +43,11 @@
     "autoload-dev": {
         "psr-4": {
             "Dhl\\Sdk\\Paket\\Retoure\\Test\\": "test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-DHLGW-779": "2.0.x-dev"
         }
     }
 }

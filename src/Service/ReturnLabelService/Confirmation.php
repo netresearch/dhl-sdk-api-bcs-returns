@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService;
@@ -11,8 +13,8 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 /**
  * Class Confirmation
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class Confirmation implements ConfirmationInterface
 {
@@ -36,13 +38,6 @@ class Confirmation implements ConfirmationInterface
      */
     private $routingCode;
 
-    /**
-     * Confirmation constructor.
-     * @param string $shipmentNumber
-     * @param string $labelData
-     * @param string $qrLabelData
-     * @param string $routingCode
-     */
     public function __construct(
         string $shipmentNumber,
         string $labelData,

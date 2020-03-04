@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Service;
@@ -16,8 +18,7 @@ use Dhl\Sdk\Paket\Retoure\Model\RequestType\ReturnOrder;
 use Dhl\Sdk\Paket\Retoure\Test\Expectation\ReturnLabelServiceTestExpectation as Expectation;
 use Dhl\Sdk\Paket\Retoure\Test\Provider\ReturnLabelServiceTestProvider;
 use Http\Client\Exception\NetworkException;
-use Http\Discovery\MessageFactoryDiscovery;
-use Http\Discovery\StreamFactoryDiscovery;
+use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
@@ -25,8 +26,8 @@ use Psr\Log\Test\TestLogger;
 /**
  * Class ReturnLabelServiceTest
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://netresearch.de
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ReturnLabelServiceTest extends TestCase
 {
@@ -71,8 +72,8 @@ class ReturnLabelServiceTest extends TestCase
     {
         $httpClient = new Client();
 
-        $responseFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
 
         $returnLabelResponse = $responseFactory
             ->createResponse(201, 'Created')
@@ -125,8 +126,8 @@ class ReturnLabelServiceTest extends TestCase
         }
 
         $httpClient = new Client();
-        $responseFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
+        $responseFactory = Psr17FactoryDiscovery::findResponseFactory();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
 
         $returnLabelResponse = $responseFactory
             ->createResponse($statusCode)
@@ -163,8 +164,8 @@ class ReturnLabelServiceTest extends TestCase
     {
         $this->expectException(ServiceException::class);
 
-        $requestFactory = MessageFactoryDiscovery::find();
-        $streamFactory = StreamFactoryDiscovery::find();
+        $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
+        $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
         $payload = json_encode($returnOrder);
         $stream = $streamFactory->createStream($payload);
 

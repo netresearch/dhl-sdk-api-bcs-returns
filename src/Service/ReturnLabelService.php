@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Service;
@@ -13,23 +15,23 @@ use Dhl\Sdk\Paket\Retoure\Exception\DetailedErrorException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceExceptionFactory;
 use Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService\Confirmation;
 use Dhl\Sdk\Paket\Retoure\Serializer\JsonSerializer;
-use Http\Client\Exception as HttpClientException;
-use Http\Client\HttpClient;
-use Http\Message\RequestFactory;
-use Http\Message\StreamFactory;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Class ReturnLabelService
  *
- * @author  Andreas Müller <andreas.mueller@netresearch.de>
- * @link    https://www.netresearch.de/
+ * @author Andreas Müller <andreas.mueller@netresearch.de>
+ * @link   https://www.netresearch.de/
  */
 class ReturnLabelService implements ReturnLabelServiceInterface
 {
-    const OPERATION_BOOK_LABEL = 'returns/';
+    private const OPERATION_BOOK_LABEL = 'returns/';
 
     /**
-     * @var HttpClient
+     * @var ClientInterface
      */
     private $client;
 
@@ -44,30 +46,21 @@ class ReturnLabelService implements ReturnLabelServiceInterface
     private $serializer;
 
     /**
-     * @var RequestFactory
+     * @var RequestFactoryInterface
      */
     private $requestFactory;
 
     /**
-     * @var StreamFactory
+     * @var StreamFactoryInterface
      */
     private $streamFactory;
 
-    /**
-     * ReturnLabelService constructor.
-     *
-     * @param HttpClient $client
-     * @param string $baseUrl
-     * @param JsonSerializer $serializer
-     * @param RequestFactory $requestFactory
-     * @param StreamFactory $streamFactory
-     */
     public function __construct(
-        HttpClient $client,
+        ClientInterface $client,
         string $baseUrl,
         JsonSerializer $serializer,
-        RequestFactory $requestFactory,
-        StreamFactory $streamFactory
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory
     ) {
         $this->client = $client;
         $this->baseUrl = $baseUrl;
@@ -84,8 +77,7 @@ class ReturnLabelService implements ReturnLabelServiceInterface
             $payload = $this->serializer->encode($returnOrder);
             $stream = $this->streamFactory->createStream($payload);
 
-            $httpRequest = $this->requestFactory->createRequest('POST', $uri);
-            $httpRequest = $httpRequest->withBody($stream);
+            $httpRequest = $this->requestFactory->createRequest('POST', $uri)->withBody($stream);
 
             $response = $this->client->sendRequest($httpRequest);
             $responseJson = (string) $response->getBody();
@@ -93,7 +85,7 @@ class ReturnLabelService implements ReturnLabelServiceInterface
             throw ServiceExceptionFactory::createAuthenticationException($exception);
         } catch (DetailedErrorException $exception) {
             throw ServiceExceptionFactory::createDetailedServiceException($exception);
-        } catch (HttpClientException $exception) {
+        } catch (ClientExceptionInterface $exception) {
             throw ServiceExceptionFactory::createServiceException($exception);
         } catch (\Throwable $exception) {
             throw ServiceExceptionFactory::create($exception);
@@ -106,8 +98,6 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         $qrLabelData = $responseData['qrLabelData'] ?: '';
         $routingCode = $responseData['routingCode'] ?: '';
 
-        $confirmation = new Confirmation($shipmentNumber, $labelData, $qrLabelData, $routingCode);
-
-        return $confirmation;
+        return new Confirmation($shipmentNumber, $labelData, $qrLabelData, $routingCode);
     }
 }
