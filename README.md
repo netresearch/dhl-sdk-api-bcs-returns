@@ -90,10 +90,10 @@ $serviceFactory = new \Dhl\Sdk\Paket\Retoure\Service\ServiceFactory();
 $service = $serviceFactory->createReturnLabelService($authStorage, $logger, $sandbox = true);
 
 $requestBuilder = new \Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder();
-$requestBuilder->setAccountDetails($receiverId = 'DE');
+$requestBuilder->setAccountDetails($receiverId = 'deu');
 $requestBuilder->setShipperAddress(
     $name = 'Jane Doe',
-    $countryCode = 'DE',
+    $countryCode = 'DEU',
     $postalCode = '53113',
     $city = 'Bonn',
     $streetName = 'Sträßchensweg',
