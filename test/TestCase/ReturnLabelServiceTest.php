@@ -167,7 +167,7 @@ class ReturnLabelServiceTest extends TestCase
 
         $streamFactory = Psr17FactoryDiscovery::findStreamFactory();
         $requestFactory = Psr17FactoryDiscovery::findRequestFactory();
-        $payload = json_encode($returnOrder);
+        $payload = (string) json_encode($returnOrder);
         $stream = $streamFactory->createStream($payload);
 
         $httpClient = new Client();
