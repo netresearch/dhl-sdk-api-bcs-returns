@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
+use JsonSerializable;
 
 /**
  * Class ReturnLabelServiceTestProvider
@@ -19,7 +20,7 @@ use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 class ReturnLabelServiceTestProvider
 {
     /**
-     * @return \JsonSerializable[][]|string[][]
+     * @return JsonSerializable[][]|string[][]
      * @throws RequestValidatorException
      */
     public static function labelSuccess(): array
@@ -42,7 +43,7 @@ class ReturnLabelServiceTestProvider
     }
 
     /**
-     * @return \JsonSerializable[][]|int[][]|string[][]
+     * @return JsonSerializable[][]|int[][]|string[][]
      * @throws RequestValidatorException
      */
     public static function labelError(): array
@@ -71,7 +72,7 @@ class ReturnLabelServiceTestProvider
     }
 
     /**
-     * @return \JsonSerializable[][]
+     * @return JsonSerializable[][]
      * @throws RequestValidatorException
      */
     public static function networkError(): array
