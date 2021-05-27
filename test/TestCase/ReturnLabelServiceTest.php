@@ -65,7 +65,7 @@ class ReturnLabelServiceTest extends TestCase
      * @test
      * @dataProvider successDataProvider
      *
-     * @param JsonSerializable|ReturnOrder $returnOrder
+     * @param ReturnOrder $returnOrder
      * @param string $responseBody
      * @throws ServiceException
      */
