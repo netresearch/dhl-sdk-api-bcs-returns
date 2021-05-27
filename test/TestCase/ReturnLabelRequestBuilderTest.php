@@ -112,23 +112,23 @@ class ReturnLabelRequestBuilderTest extends TestCase
         $builder->addCustomsItem(5, 'DHL Foo', 59, 800, '24-MB05', 'DEU', '123456');
 
         $request = $builder->create();
-        $requestJson = json_encode($request, JSON_UNESCAPED_UNICODE);
+        $requestJson = (string) json_encode($request, JSON_UNESCAPED_UNICODE);
 
-        self::assertContains("\"receiverId\":\"{$receiverId}\"", $requestJson);
-        self::assertContains("\"customerReference\":\"{$billingNumber}\"", $requestJson);
-        self::assertContains("\"shipmentReference\":\"{$shipmentReference}\"", $requestJson);
-        self::assertContains("\"returnDocumentType\":\"SHIPMENT_LABEL\"", $requestJson);
-        self::assertContains("\"email\":\"{$email}\"", $requestJson);
-        self::assertContains("\"telephoneNumber\":\"{$phone}\"", $requestJson);
-        self::assertContains("\"name1\":\"{$shipperName}\"", $requestJson);
-        self::assertContains("\"countryISOCode\":\"{$shipperCountry}\"", $requestJson);
-        self::assertContains("\"postCode\":\"{$shipperPostalCode}\"", $requestJson);
-        self::assertContains("\"city\":\"{$shipperCity}\"", $requestJson);
-        self::assertContains("\"streetName\":\"{$shipperStreetName}\"", $requestJson);
-        self::assertContains("\"houseNumber\":\"{$shipperStreetNumber}\"", $requestJson);
-        self::assertContains("\"weightInGrams\":{$weight}", $requestJson);
-        self::assertContains("\"value\":{$amount}", $requestJson);
-        self::assertContains("\"currency\":\"{$currency}\"", $requestJson);
+        self::assertStringContainsString("\"receiverId\":\"{$receiverId}\"", $requestJson);
+        self::assertStringContainsString("\"customerReference\":\"{$billingNumber}\"", $requestJson);
+        self::assertStringContainsString("\"shipmentReference\":\"{$shipmentReference}\"", $requestJson);
+        self::assertStringContainsString("\"returnDocumentType\":\"SHIPMENT_LABEL\"", $requestJson);
+        self::assertStringContainsString("\"email\":\"{$email}\"", $requestJson);
+        self::assertStringContainsString("\"telephoneNumber\":\"{$phone}\"", $requestJson);
+        self::assertStringContainsString("\"name1\":\"{$shipperName}\"", $requestJson);
+        self::assertStringContainsString("\"countryISOCode\":\"{$shipperCountry}\"", $requestJson);
+        self::assertStringContainsString("\"postCode\":\"{$shipperPostalCode}\"", $requestJson);
+        self::assertStringContainsString("\"city\":\"{$shipperCity}\"", $requestJson);
+        self::assertStringContainsString("\"streetName\":\"{$shipperStreetName}\"", $requestJson);
+        self::assertStringContainsString("\"houseNumber\":\"{$shipperStreetNumber}\"", $requestJson);
+        self::assertStringContainsString("\"weightInGrams\":{$weight}", $requestJson);
+        self::assertStringContainsString("\"value\":{$amount}", $requestJson);
+        self::assertStringContainsString("\"currency\":\"{$currency}\"", $requestJson);
     }
 
     /**
