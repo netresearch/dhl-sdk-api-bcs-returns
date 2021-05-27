@@ -10,6 +10,7 @@ namespace Dhl\Sdk\Paket\Retoure\Model;
 
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestValidator as Validator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ReturnLabelRequestValidatorTest
@@ -17,10 +18,10 @@ use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestValidator as Validator;
  * @author Andreas Müller <andreas.mueller@netresearch.de>
  * @link   https://www.netresearch.de/
  */
-class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
+class ReturnLabelRequestBuilderTest extends TestCase
 {
     /**
-     * @return ReturnLabelRequestBuilder[][]
+     * @return array<string, array{ReturnLabelRequestBuilder, string}>
      */
     public function dataProvider(): array
     {
@@ -87,7 +88,7 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
      * @test
      * @throws RequestValidatorException
      */
-    public function validRequest()
+    public function validRequest(): void
     {
         $builder = new ReturnLabelRequestBuilder();
         $builder->setAccountDetails($receiverId = 'CH', $billingNumber = '22222222225301');
@@ -139,12 +140,12 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
      * @param string $exceptionMessage
      * @throws RequestValidatorException
      */
-    public function invalidRequest(ReturnLabelRequestBuilder $builder, string $exceptionMessage)
+    public function invalidRequest(ReturnLabelRequestBuilder $builder, string $exceptionMessage): void
     {
         $this->expectException(RequestValidatorException::class);
         if (strpos($exceptionMessage, '%s') !== false) {
             $exceptionMessage = str_replace('%s', '[\w]+', $exceptionMessage);
-            $this->expectExceptionMessageRegExp("/$exceptionMessage/");
+            $this->expectExceptionMessageMatches("/$exceptionMessage/");
         } else {
             $this->expectExceptionMessage($exceptionMessage);
         }

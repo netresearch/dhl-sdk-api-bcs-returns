@@ -1,2 +1,5 @@
-includes:
 parameters:
+    level: max
+    paths:
+        - src
+        - test

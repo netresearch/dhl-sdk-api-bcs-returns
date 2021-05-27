@@ -28,9 +28,9 @@ class ReturnLabelServiceTestExpectation
      * @param ReturnOrder $returnOrder The request object ready for serialization.
      * @param string $requestJson The actual message sent to the web service.
      */
-    public static function assertLabelRequest(ReturnOrder $returnOrder, string $requestJson)
+    public static function assertLabelRequest(ReturnOrder $returnOrder, string $requestJson): void
     {
-        $expected = json_decode(json_encode($returnOrder), true);
+        $expected = json_decode((string) json_encode($returnOrder), true);
         $actual = json_decode($requestJson, true);
 
         Assert::assertSame($expected['receiverId'], $actual['receiverId']);
@@ -65,7 +65,7 @@ class ReturnLabelServiceTestExpectation
      * @param ConfirmationInterface $result
      * @param string $responseJson
      */
-    public static function assertLabelResponse(ConfirmationInterface $result, string $responseJson)
+    public static function assertLabelResponse(ConfirmationInterface $result, string $responseJson): void
     {
         $responseData = json_decode($responseJson, true);
 
@@ -86,7 +86,7 @@ class ReturnLabelServiceTestExpectation
      * @return void
      * @throws ExpectationFailedException
      */
-    public static function assertErrorLogged(TestLogger $logger, string $responseBody = '')
+    public static function assertErrorLogged(TestLogger $logger, string $responseBody = ''): void
     {
         Assert::assertTrue($logger->hasErrorRecords(), 'No error logged.');
 
@@ -109,7 +109,7 @@ class ReturnLabelServiceTestExpectation
      * @return void
      * @throws ExpectationFailedException
      */
-    public static function assertCommunicationLogged(TestLogger $logger, string $requestBody, string $responseJson = '')
+    public static function assertCommunicationLogged(TestLogger $logger, string $requestBody, string $responseJson = ''): void
     {
         Assert::assertTrue($logger->hasInfoRecords(), 'Logger has no info messages');
 

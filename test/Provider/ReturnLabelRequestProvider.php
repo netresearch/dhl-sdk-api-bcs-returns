@@ -10,6 +10,7 @@ namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder;
+use JsonSerializable;
 
 /**
  * Class ReturnLabelRequestProvider
@@ -23,10 +24,10 @@ class ReturnLabelRequestProvider
      * Build a valid request for a domestic return label. Configurable return document type.
      *
      * @param string|null $qrCode
-     * @return \JsonSerializable
+     * @return JsonSerializable
      * @throws RequestValidatorException
      */
-    public static function validRequest(string $qrCode = null): \JsonSerializable
+    public static function validRequest(string $qrCode = null): JsonSerializable
     {
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('DE', '22222222220701');
@@ -54,10 +55,10 @@ class ReturnLabelRequestProvider
     /**
      * Build a valid request for a return label which requires a customs document.
      *
-     * @return \JsonSerializable
+     * @return JsonSerializable
      * @throws RequestValidatorException
      */
-    public static function validCustomsRequest(): \JsonSerializable
+    public static function validCustomsRequest(): JsonSerializable
     {
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('CH', '22222222225301');
@@ -97,10 +98,10 @@ class ReturnLabelRequestProvider
     /**
      * Set an invalid country code as origin country to trigger a validation error response (400 Bad Request).
      *
-     * @return \JsonSerializable
+     * @return JsonSerializable
      * @throws RequestValidatorException
      */
-    public static function validationErrorRequest(): \JsonSerializable
+    public static function validationErrorRequest(): JsonSerializable
     {
         $requestBuilder = new ReturnLabelRequestBuilder();
         $requestBuilder->setAccountDetails('CH', '22222222225301');

@@ -21,7 +21,7 @@ class ReturnLabelResponseProvider
      */
     public static function successResponse(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/labelResponse.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/labelResponse.json') ?: '';
     }
 
     /**
@@ -29,7 +29,7 @@ class ReturnLabelResponseProvider
      */
     public static function pdfResponse(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/labelResponsePdf.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/labelResponsePdf.json') ?: '';
     }
 
     /**
@@ -37,7 +37,7 @@ class ReturnLabelResponseProvider
      */
     public static function qrResponse(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/labelResponseQr.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/labelResponseQr.json') ?: '';
     }
 
     /**
@@ -45,7 +45,7 @@ class ReturnLabelResponseProvider
      */
     public static function unauthorized(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/unauthorized.html') ?: '';
+        return file_get_contents(__DIR__ . '/_files/unauthorized.html') ?: '';
     }
 
     /**
@@ -53,7 +53,7 @@ class ReturnLabelResponseProvider
      */
     public static function authenticationFailed(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/authenticationFailed.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/authenticationFailed.json') ?: '';
     }
 
     /**
@@ -61,7 +61,7 @@ class ReturnLabelResponseProvider
      */
     public static function forbidden(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/forbidden.html') ?: '';
+        return file_get_contents(__DIR__ . '/_files/forbidden.html') ?: '';
     }
 
     /**
@@ -69,7 +69,7 @@ class ReturnLabelResponseProvider
      */
     public static function validationFailed(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/validationFailed.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/validationFailed.json') ?: '';
     }
 
     /**
@@ -77,7 +77,7 @@ class ReturnLabelResponseProvider
      */
     public static function serverError(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/serverError.json') ?: '';
+        return file_get_contents(__DIR__ . '/_files/serverError.json') ?: '';
     }
 
     /**
@@ -85,6 +85,6 @@ class ReturnLabelResponseProvider
      */
     public static function serverErrorHtml(): string
     {
-        return \file_get_contents(__DIR__ . '/_files/serverError.html') ?: '';
+        return file_get_contents(__DIR__ . '/_files/serverError.html') ?: '';
     }
 }

@@ -20,6 +20,7 @@ use Dhl\Sdk\Paket\Retoure\Test\Provider\ReturnLabelServiceTestProvider;
 use Http\Client\Exception\NetworkException;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Mock\Client;
+use JsonSerializable;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
@@ -32,7 +33,7 @@ use Psr\Log\Test\TestLogger;
 class ReturnLabelServiceTest extends TestCase
 {
     /**
-     * @return \JsonSerializable[][]|string[][]
+     * @return JsonSerializable[][]|string[][]
      * @throws RequestValidatorException
      */
     public function successDataProvider(): array
@@ -41,7 +42,7 @@ class ReturnLabelServiceTest extends TestCase
     }
 
     /**
-     * @return \JsonSerializable[][]|int[][]|string[][]
+     * @return JsonSerializable[][]|int[][]|string[][]
      * @throws RequestValidatorException
      */
     public function errorDataProvider(): array
@@ -50,7 +51,7 @@ class ReturnLabelServiceTest extends TestCase
     }
 
     /**
-     * @return \JsonSerializable[][]
+     * @return JsonSerializable[][]
      * @throws RequestValidatorException
      */
     public function networkErrorDataProvider(): array
@@ -64,11 +65,11 @@ class ReturnLabelServiceTest extends TestCase
      * @test
      * @dataProvider successDataProvider
      *
-     * @param \JsonSerializable|ReturnOrder $returnOrder
+     * @param JsonSerializable|ReturnOrder $returnOrder
      * @param string $responseBody
      * @throws ServiceException
      */
-    public function bookLabelSuccess(ReturnOrder $returnOrder, string $responseBody)
+    public function bookLabelSuccess(ReturnOrder $returnOrder, string $responseBody): void
     {
         $httpClient = new Client();
 
@@ -97,7 +98,7 @@ class ReturnLabelServiceTest extends TestCase
      * @test
      * @dataProvider errorDataProvider
      *
-     * @param \JsonSerializable $returnOrder
+     * @param JsonSerializable $returnOrder
      * @param int $statusCode
      * @param string $contentType
      * @param string $responseBody
@@ -105,16 +106,16 @@ class ReturnLabelServiceTest extends TestCase
      * @throws ServiceException
      */
     public function returnLabelError(
-        \JsonSerializable $returnOrder,
+        JsonSerializable $returnOrder,
         int $statusCode,
         string $contentType,
         string $responseBody
-    ) {
+    ): void {
         $this->expectExceptionCode($statusCode);
 
         if ($statusCode === 401) {
             $this->expectException(AuthenticationException::class);
-            $this->expectExceptionMessageRegExp('/^Authentication failed\./');
+            $this->expectExceptionMessageMatches('/^Authentication failed\./');
         } elseif (($statusCode >= 400) && ($statusCode < 500)) {
             if ($contentType === 'application/json') {
                 $this->expectException(DetailedServiceException::class);
@@ -157,10 +158,10 @@ class ReturnLabelServiceTest extends TestCase
      *
      * @test
      * @dataProvider networkErrorDataProvider
-     * @param \JsonSerializable $returnOrder
+     * @param JsonSerializable $returnOrder
      * @throws ServiceException
      */
-    public function networkError(\JsonSerializable $returnOrder)
+    public function networkError(JsonSerializable $returnOrder): void
     {
         $this->expectException(ServiceException::class);
 
