@@ -11,6 +11,7 @@ namespace Dhl\Sdk\Paket\Retoure\Model;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestValidator as Validator;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Runner\Version;
 
 /**
  * Class ReturnLabelRequestValidatorTest
@@ -145,7 +146,11 @@ class ReturnLabelRequestBuilderTest extends TestCase
         $this->expectException(RequestValidatorException::class);
         if (strpos($exceptionMessage, '%s') !== false) {
             $exceptionMessage = str_replace('%s', '[\w]+', $exceptionMessage);
-            $this->expectExceptionMessageMatches("/$exceptionMessage/");
+			if(version_compare(Version::id(), '8.0', '>=')) {
+				$this->expectExceptionMessageMatches("/$exceptionMessage/");
+			} else {
+				$this->expectExceptionMessageRegExp("/$exceptionMessage/");
+			}
         } else {
             $this->expectExceptionMessage($exceptionMessage);
         }

@@ -22,6 +22,7 @@ use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Mock\Client;
 use JsonSerializable;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Runner\Version;
 use Psr\Log\Test\TestLogger;
 
 /**
@@ -115,7 +116,11 @@ class ReturnLabelServiceTest extends TestCase
 
         if ($statusCode === 401) {
             $this->expectException(AuthenticationException::class);
-            $this->expectExceptionMessageMatches('/^Authentication failed\./');
+			if(version_compare(Version::id(), '8.0', '>=')) {
+				$this->expectExceptionMessageMatches('/^Authentication failed\./');
+			} else {
+				$this->expectExceptionMessageRegExp('/^Authentication failed\./');
+			}
         } elseif (($statusCode >= 400) && ($statusCode < 500)) {
             if ($contentType === 'application/json') {
                 $this->expectException(DetailedServiceException::class);
