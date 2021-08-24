@@ -10,8 +10,10 @@
     "homepage": "https://entwickler.dhl.de/group/ep/wsapis/retouren",
     "authors": [
         {
-            "name": "Christoph Aßmann",
-            "email": "christoph.assmann@netresearch.de"
+            "email": "plugins@netresearch.de",
+            "name": "Netresearch DTT GmbH",
+            "role": "Manufacturer",
+            "homepage": "https://www.netresearch.de/"
         }
     ],
     "require": {
@@ -43,11 +45,6 @@
     "autoload-dev": {
         "psr-4": {
             "Dhl\\Sdk\\Paket\\Retoure\\Test\\": "test/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "2.0.x-dev"
         }
     }
 }
