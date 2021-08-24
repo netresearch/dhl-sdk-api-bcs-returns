@@ -14,8 +14,6 @@ use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
  * Interface ReturnLabelRequestBuilderInterface
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface ReturnLabelRequestBuilderInterface
 {
@@ -23,16 +21,16 @@ interface ReturnLabelRequestBuilderInterface
      * Set account related data.
      *
      * The name of the return recipient (receiverId) can be found in the
-     * DHL business customer portal. The billing number will be printed on
-     * the label.
+     * DHL business customer portal. The customer reference will be printed on
+     * the label
      *
      * @param string $receiverId Receiver ID (Retourenempfängername)
-     * @param string|null $billingNumber Billing Number (Abrechnungsnummer)
+     * @param string|null $customerReference Customer reference (usually order number)
      * @return ReturnLabelRequestBuilderInterface
      */
     public function setAccountDetails(
         string $receiverId,
-        ?string $billingNumber = null
+        ?string $customerReference = null
     ): ReturnLabelRequestBuilderInterface;
 
     /**

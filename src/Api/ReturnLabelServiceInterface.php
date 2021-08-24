@@ -17,8 +17,6 @@ use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
  * Interface ReturnLabelServiceInterface
  *
  * @api
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 interface ReturnLabelServiceInterface
 {

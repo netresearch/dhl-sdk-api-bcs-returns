@@ -10,12 +10,6 @@ namespace Dhl\Sdk\Paket\Retoure\Service\ReturnLabelService;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 
-/**
- * Class Confirmation
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class Confirmation implements ConfirmationInterface
 {
     /**

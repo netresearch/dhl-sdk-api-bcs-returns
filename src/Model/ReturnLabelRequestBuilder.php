@@ -15,12 +15,6 @@ use Dhl\Sdk\Paket\Retoure\Model\RequestType\CustomsDocumentPosition;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\ReturnOrder;
 use Dhl\Sdk\Paket\Retoure\Model\RequestType\SimpleAddress;
 
-/**
- * Class ReturnLabelRequestBuilder
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 {
     /**
@@ -30,10 +24,10 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
 
     public function setAccountDetails(
         string $receiverId,
-        ?string $billingNumber = null
+        ?string $customerReference = null
     ): ReturnLabelRequestBuilderInterface {
         $this->data['receiverId'] = $receiverId;
-        $this->data['billingNumber'] = $billingNumber;
+        $this->data['customerReference'] = $customerReference;
 
         return $this;
     }
@@ -194,7 +188,7 @@ class ReturnLabelRequestBuilder implements ReturnLabelRequestBuilderInterface
         }
 
         $returnOrder = new ReturnOrder($this->data['receiverId'], $senderAddress);
-        $returnOrder->setCustomerReference($this->data['billingNumber']);
+        $returnOrder->setCustomerReference($this->data['customerReference']);
         $returnOrder->setShipmentReference($this->data['shipmentReference'] ?? null);
         $returnOrder->setReturnDocumentType($this->data['returnDocumentType'] ?? ReturnOrder::DOCUMENT_TYPE_BOTH);
 

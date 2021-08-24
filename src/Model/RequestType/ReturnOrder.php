@@ -8,12 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 
-/**
- * Class ReturnOrder
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnOrder implements \JsonSerializable
 {
     public const DOCUMENT_TYPE_PDF = 'SHIPMENT_LABEL';

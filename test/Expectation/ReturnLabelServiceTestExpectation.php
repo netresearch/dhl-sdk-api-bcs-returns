@@ -14,12 +14,6 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use Psr\Log\Test\TestLogger;
 
-/**
- * Class ReturnLabelServiceTestExpectation
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelServiceTestExpectation
 {
     /**

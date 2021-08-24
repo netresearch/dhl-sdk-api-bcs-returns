@@ -8,12 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\Sdk\Paket\Retoure\Model\RequestType;
 
-/**
- * Class CustomsDocumentPosition
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class CustomsDocumentPosition implements \JsonSerializable
 {
     /**

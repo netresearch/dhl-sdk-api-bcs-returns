@@ -20,10 +20,6 @@ use Psr\Http\Message\ResponseInterface;
  * Class ReturnLabelErrorPlugin
  *
  * On request errors, throw an HTTP exception with message extracted from response.
- *
- * @author Christoph Aßmann <christoph.assmann@netresearch.de>
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
  */
 final class ReturnLabelErrorPlugin implements Plugin
 {

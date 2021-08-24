@@ -17,12 +17,6 @@ use Http\Discovery\Exception\NotFoundException;
 use Http\Discovery\HttpClientDiscovery;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class ServiceFactory
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ServiceFactory implements ServiceFactoryInterface
 {
     public function createReturnLabelService(

@@ -11,12 +11,6 @@ namespace Dhl\Sdk\Paket\Retoure\Model;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestValidator as Validator;
 
-/**
- * Class ReturnLabelRequestValidatorTest
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
@@ -90,7 +84,7 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
     public function validRequest()
     {
         $builder = new ReturnLabelRequestBuilder();
-        $builder->setAccountDetails($receiverId = 'CH', $billingNumber = '22222222225301');
+        $builder->setAccountDetails($receiverId = 'CH', $customerReference = '22222222225301');
         $builder->setShipmentReference($shipmentReference = 'RMA #1');
         $builder->setDocumentTypePdf();
         $builder->setShipperAddress(
@@ -114,7 +108,7 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
         $requestJson = json_encode($request, JSON_UNESCAPED_UNICODE);
 
         self::assertContains("\"receiverId\":\"{$receiverId}\"", $requestJson);
-        self::assertContains("\"customerReference\":\"{$billingNumber}\"", $requestJson);
+        self::assertContains("\"customerReference\":\"{$customerReference}\"", $requestJson);
         self::assertContains("\"shipmentReference\":\"{$shipmentReference}\"", $requestJson);
         self::assertContains("\"returnDocumentType\":\"SHIPMENT_LABEL\"", $requestJson);
         self::assertContains("\"email\":\"{$email}\"", $requestJson);

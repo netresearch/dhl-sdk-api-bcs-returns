@@ -20,12 +20,6 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-/**
- * Class ReturnLabelService
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelService implements ReturnLabelServiceInterface
 {
     private const OPERATION_BOOK_LABEL = 'returns/';

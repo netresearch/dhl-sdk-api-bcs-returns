@@ -23,12 +23,6 @@ use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\Test\TestLogger;
 
-/**
- * Class ReturnLabelServiceTest
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelServiceTest extends TestCase
 {
     /**

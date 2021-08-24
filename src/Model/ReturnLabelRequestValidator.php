@@ -10,12 +10,6 @@ namespace Dhl\Sdk\Paket\Retoure\Model;
 
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 
-/**
- * Class ReturnLabelRequestValidator
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelRequestValidator
 {
     public const MSG_RECEIVER_ID_REQUIRED = 'Receiver ID is required.';

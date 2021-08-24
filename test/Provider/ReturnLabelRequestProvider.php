@@ -11,12 +11,6 @@ namespace Dhl\Sdk\Paket\Retoure\Test\Provider;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder;
 
-/**
- * Class ReturnLabelRequestProvider
- *
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class ReturnLabelRequestProvider
 {
     /**

@@ -15,8 +15,6 @@ namespace Dhl\Sdk\Paket\Retoure\Exception;
  * caused by invalid request data before a web service request was sent.
  *
  * @api
- * @author Andreas Müller <andreas.mueller@netresearch.de>
- * @link   https://netresearch.de
  */
 class RequestValidatorException extends DetailedServiceException
 {
