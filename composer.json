@@ -17,12 +17,12 @@
         }
     ],
     "require": {
-        "php": "^7.1.0",
+        "php": "^7.2.0 || ^8.0.0",
         "ext-json": "*",
-        "php-http/discovery": "^1.0.0",
-        "php-http/httplug": "^2.0.0",
-        "php-http/logger-plugin": "^1.0.0",
-        "psr/http-client": "^1.0.0",
+        "php-http/discovery": "^1.10.0",
+        "php-http/httplug": "^2.2.0",
+        "php-http/logger-plugin": "^1.2.1",
+        "psr/http-client": "^1.0.1",
         "psr/http-client-implementation": "^1.0.0",
         "psr/http-factory": "^1.0.0",
         "psr/http-factory-implementation": "^1.0.0",
@@ -32,9 +32,9 @@
     },
     "require-dev": {
         "nyholm/psr7": "^1.0.0",
-        "phpunit/phpunit": "^7.0.0",
-        "php-http/mock-client": "dev-upgrade-version-2",
-        "phpstan/phpstan": "^0.12.2",
+        "phpunit/phpunit": "^8.0.0 || ^9.0.0",
+        "php-http/mock-client": "^1.5.0",
+        "phpstan/phpstan": "^1.5.0",
         "squizlabs/php_codesniffer": "^3.4"
     },
     "autoload": {
@@ -45,6 +45,11 @@
     "autoload-dev": {
         "psr-4": {
             "Dhl\\Sdk\\Paket\\Retoure\\Test\\": "test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.1.0.x-dev"
         }
     }
 }

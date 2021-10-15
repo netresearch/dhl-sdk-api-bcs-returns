@@ -108,7 +108,6 @@ class ReturnLabelServiceTest extends TestCase
 
         if ($statusCode === 401) {
             $this->expectException(AuthenticationException::class);
-            $this->expectExceptionMessageRegExp('/^Authentication failed\./');
         } elseif (($statusCode >= 400) && ($statusCode < 500)) {
             if ($contentType === 'application/json') {
                 $this->expectException(DetailedServiceException::class);

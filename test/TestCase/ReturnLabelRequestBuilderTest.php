@@ -107,21 +107,21 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
         $request = $builder->create();
         $requestJson = json_encode($request, JSON_UNESCAPED_UNICODE);
 
-        self::assertContains("\"receiverId\":\"{$receiverId}\"", $requestJson);
-        self::assertContains("\"customerReference\":\"{$customerReference}\"", $requestJson);
-        self::assertContains("\"shipmentReference\":\"{$shipmentReference}\"", $requestJson);
-        self::assertContains("\"returnDocumentType\":\"SHIPMENT_LABEL\"", $requestJson);
-        self::assertContains("\"email\":\"{$email}\"", $requestJson);
-        self::assertContains("\"telephoneNumber\":\"{$phone}\"", $requestJson);
-        self::assertContains("\"name1\":\"{$shipperName}\"", $requestJson);
-        self::assertContains("\"countryISOCode\":\"{$shipperCountry}\"", $requestJson);
-        self::assertContains("\"postCode\":\"{$shipperPostalCode}\"", $requestJson);
-        self::assertContains("\"city\":\"{$shipperCity}\"", $requestJson);
-        self::assertContains("\"streetName\":\"{$shipperStreetName}\"", $requestJson);
-        self::assertContains("\"houseNumber\":\"{$shipperStreetNumber}\"", $requestJson);
-        self::assertContains("\"weightInGrams\":{$weight}", $requestJson);
-        self::assertContains("\"value\":{$amount}", $requestJson);
-        self::assertContains("\"currency\":\"{$currency}\"", $requestJson);
+        self::assertNotFalse(strpos($requestJson, "\"receiverId\":\"{$receiverId}\""));
+        self::assertNotFalse(strpos($requestJson, "\"customerReference\":\"{$customerReference}\""));
+        self::assertNotFalse(strpos($requestJson, "\"shipmentReference\":\"{$shipmentReference}\""));
+        self::assertNotFalse(strpos($requestJson, "\"returnDocumentType\":\"SHIPMENT_LABEL\""));
+        self::assertNotFalse(strpos($requestJson, "\"email\":\"{$email}\""));
+        self::assertNotFalse(strpos($requestJson, "\"telephoneNumber\":\"{$phone}\""));
+        self::assertNotFalse(strpos($requestJson, "\"name1\":\"{$shipperName}\""));
+        self::assertNotFalse(strpos($requestJson, "\"countryISOCode\":\"{$shipperCountry}\""));
+        self::assertNotFalse(strpos($requestJson, "\"postCode\":\"{$shipperPostalCode}\""));
+        self::assertNotFalse(strpos($requestJson, "\"city\":\"{$shipperCity}\""));
+        self::assertNotFalse(strpos($requestJson, "\"streetName\":\"{$shipperStreetName}\""));
+        self::assertNotFalse(strpos($requestJson, "\"houseNumber\":\"{$shipperStreetNumber}\""));
+        self::assertNotFalse(strpos($requestJson, "\"weightInGrams\":{$weight}"));
+        self::assertNotFalse(strpos($requestJson, "\"value\":{$amount}"));
+        self::assertNotFalse(strpos($requestJson, "\"currency\":\"{$currency}\""));
     }
 
     /**
@@ -138,7 +138,7 @@ class ReturnLabelRequestBuilderTest extends \PHPUnit\Framework\TestCase
         $this->expectException(RequestValidatorException::class);
         if (strpos($exceptionMessage, '%s') !== false) {
             $exceptionMessage = str_replace('%s', '[\w]+', $exceptionMessage);
-            $this->expectExceptionMessageRegExp("/$exceptionMessage/");
+            $this->assertNotFalse(strpos("/$exceptionMessage/", $exceptionMessage));
         } else {
             $this->expectExceptionMessage($exceptionMessage);
         }
