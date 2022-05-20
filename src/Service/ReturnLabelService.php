@@ -88,9 +88,9 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         $responseData = $this->serializer->decode($responseJson);
 
         $shipmentNumber = $responseData['shipmentNumber'] ?: '';
-        $labelData = $responseData['labelData'] ?: '';
-        $qrLabelData = $responseData['qrLabelData'] ?: '';
-        $routingCode = $responseData['routingCode'] ?: '';
+        $labelData = $responseData['labelData'] ?? '';
+        $qrLabelData = $responseData['qrLabelData'] ?? '';
+        $routingCode = $responseData['routingCode'] ?? '';
 
         return new Confirmation($shipmentNumber, $labelData, $qrLabelData, $routingCode);
     }
