@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.2.0 || ^8.0.0",
+       "php": "^8.1.0",
         "ext-json": "*",
         "php-http/discovery": "^1.10.0",
         "php-http/httplug": "^2.2.0",
